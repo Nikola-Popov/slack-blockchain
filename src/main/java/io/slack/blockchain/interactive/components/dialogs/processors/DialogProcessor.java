@@ -1,4 +1,4 @@
-package io.slack.blockchain.interactive.components.processors;
+package io.slack.blockchain.interactive.components.dialogs.processors;
 
 import com.google.gson.Gson;
 

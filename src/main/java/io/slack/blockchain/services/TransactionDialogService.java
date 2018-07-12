@@ -18,7 +18,7 @@ import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
 import io.slack.blockchain.exceptions.DialogOpenException;
 import io.slack.blockchain.factories.SlackFactory;
-import io.slack.blockchain.interactive.components.SlackTransactionsDialogFactor;
+import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogFactory;
 import io.slack.blockchain.utils.converters.UserConverter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,7 +37,7 @@ public class TransactionDialogService {
 	private UserConverter userConverter;
 
 	@Autowired
-	private SlackTransactionsDialogFactor slackTransactionDialogFactor;
+	private SlackTransactionsDialogFactory slackTransactionDialogFactory;
 
 	public void openTransactionDialog(final String triggerId) {
 		final Slack slack = slackFactory.createSlack();
@@ -45,7 +45,7 @@ public class TransactionDialogService {
 			final List<User> users = slack.methods().usersList(UsersListRequest.builder().token(token).build())
 					.getMembers();
 			final List<DialogOption> usersDialogOptions = userConverter.convert(users);
-			final Dialog dialog = slackTransactionDialogFactor.createTransactionsDialog(usersDialogOptions);
+			final Dialog dialog = slackTransactionDialogFactory.createTransactionsDialog(usersDialogOptions);
 			DialogOpenResponse dialogOpenResponse = slack.methods()
 					.dialogOpen(DialogOpenRequest.builder().token(token).triggerId(triggerId).dialog(dialog).build());
 			if (!dialogOpenResponse.isOk()) {

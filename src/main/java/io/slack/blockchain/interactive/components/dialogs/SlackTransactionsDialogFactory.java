@@ -1,4 +1,4 @@
-package io.slack.blockchain.interactive.components;
+package io.slack.blockchain.interactive.components.dialogs;
 
 import static java.util.Arrays.asList;
 
@@ -12,7 +12,7 @@ import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 import com.github.seratch.jslack.api.model.dialog.DialogTextElement;
 
 @Component
-public class SlackTransactionsDialogFactor {
+public class SlackTransactionsDialogFactory {
 	public Dialog createTransactionsDialog(final List<DialogOption> usersDialogOptions) {
 		final DialogTextElement amountTextElement = DialogTextElement.builder().label("Amount").name("amount")
 				.placeholder("Amount of currency you wish to send").maxLength(100).build();
