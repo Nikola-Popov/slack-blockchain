@@ -8,5 +8,5 @@ import lombok.Data;
 public class TransactionDialogSubmission {
 	private String amount;
 	private String currency;
-	private String userId;
+	private String user;
 }

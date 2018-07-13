@@ -1,4 +1,4 @@
-package io.slack.blockchain.utils;
+package io.slack.blockchain.commons.utils;
 
 import static java.lang.String.format;
 

@@ -1,6 +1,6 @@
 package io.slack.blockchain.controllers;
 
-import static io.slack.blockchain.utils.AttachmentResponseJsonBuilder.buildJsonResponse;
+import static io.slack.blockchain.commons.utils.AttachmentResponseJsonBuilder.buildJsonResponse;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 

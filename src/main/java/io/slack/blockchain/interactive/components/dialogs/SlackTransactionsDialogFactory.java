@@ -20,10 +20,10 @@ public class SlackTransactionsDialogFactory {
 		final DialogSelectElement currencySelectElement = DialogSelectElement.builder().name("currency")
 				.label("Currency").placeholder("Choose your preferred currency")
 				.options(asList(DialogOption.builder().label("USD").value("usd").build(),
-						DialogOption.builder().label("GBP").value("gbp").build(),
-						DialogOption.builder().label("BTC").value("btc").build(),
-						DialogOption.builder().label("BCH").value("bch").build(),
-						DialogOption.builder().label("ETC").value("etc").build()))
+						DialogOption.builder().label("GBP").value("GBP").build(),
+						DialogOption.builder().label("BTC").value("BTC").build(),
+						DialogOption.builder().label("BCH").value("BCH").build(),
+						DialogOption.builder().label("ETC").value("ETC").build()))
 				.build();
 
 		final DialogSelectElement usersSelectElement = DialogSelectElement.builder().name("user").label("User")
@@ -32,6 +32,5 @@ public class SlackTransactionsDialogFactory {
 		return Dialog.builder().title("New transaction").callbackId("transaction-dialog")
 				.elements(asList(amountTextElement, currencySelectElement, usersSelectElement)).submitLabel("Send")
 				.build();
-
 	}
 }

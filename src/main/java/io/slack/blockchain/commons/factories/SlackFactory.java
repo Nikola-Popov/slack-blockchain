@@ -1,4 +1,4 @@
-package io.slack.blockchain.factories;
+package io.slack.blockchain.commons.factories;
 
 import org.springframework.stereotype.Component;
 

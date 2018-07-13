@@ -16,10 +16,12 @@ import com.github.seratch.jslack.api.model.User;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
+import io.slack.blockchain.commons.factories.SlackFactory;
+import io.slack.blockchain.commons.utils.converters.UserConverter;
+import io.slack.blockchain.domain.TransactionDialogSubmission;
 import io.slack.blockchain.exceptions.DialogOpenException;
-import io.slack.blockchain.factories.SlackFactory;
 import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogFactory;
-import io.slack.blockchain.utils.converters.UserConverter;
+import io.slack.blockchain.interactive.components.dialogs.parsers.TransactionSubmissionDialogParser;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -39,6 +41,9 @@ public class TransactionDialogService {
 	@Autowired
 	private SlackTransactionsDialogFactory slackTransactionDialogFactory;
 
+	@Autowired
+	private TransactionSubmissionDialogParser transactionSubmissionDialogParser;
+
 	public void openTransactionDialog(final String triggerId) {
 		final Slack slack = slackFactory.createSlack();
 		try {
@@ -56,6 +61,12 @@ public class TransactionDialogService {
 			log.error(OPENING_TRANSACTION_WINDOW_ERROR_MESSAGE, exception);
 			throw new DialogOpenException(OPENING_TRANSACTION_WINDOW_ERROR_MESSAGE, exception);
 		}
+	}
+
+	public void processSubmissionDialogData(final String payload) {
+		final TransactionDialogSubmission parseSubmittedData = transactionSubmissionDialogParser
+				.parseSubmittedData(payload);
+
 	}
 
 }

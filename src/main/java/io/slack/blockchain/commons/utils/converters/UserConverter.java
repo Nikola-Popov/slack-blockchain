@@ -1,4 +1,4 @@
-package io.slack.blockchain.utils.converters;
+package io.slack.blockchain.commons.utils.converters;
 
 import java.util.ArrayList;
 import java.util.List;
