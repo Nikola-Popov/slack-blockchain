@@ -64,9 +64,9 @@ public class TransactionDialogService {
 	}
 
 	public void processSubmissionDialogData(final String payload) {
-		final TransactionDialogSubmission parseSubmittedData = transactionSubmissionDialogParser
+		final TransactionDialogSubmission transactionDialogSubmission = transactionSubmissionDialogParser
 				.parseSubmittedData(payload);
-
+		System.out.println(transactionDialogSubmission);
 	}
 
 }

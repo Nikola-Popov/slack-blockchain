@@ -45,6 +45,7 @@ public class SlackRestController {
 	@PostMapping(path = "/transaction/submit", produces = APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Void> submitTransaction(@RequestParam("payload") final String payload) {
 		System.out.println("hello world" + payload);
+		transactionDialogService.processSubmissionDialogData(payload);
 
 		return ResponseEntity.ok().build();
 	}
