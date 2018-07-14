@@ -7,7 +7,7 @@ public class DialogOpenException extends RuntimeException {
 		super(message);
 	}
 
-	public DialogOpenException(String message, Throwable cause) {
-		super(message, cause);
+	public DialogOpenException(Throwable cause) {
+		super(cause);
 	}
 }

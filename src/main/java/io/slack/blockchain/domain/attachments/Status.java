@@ -1,5 +1,5 @@
 package io.slack.blockchain.domain.attachments;
 
-public enum ColorStatus {
+public enum Status {
 	GOOD, WARNING, DANGER;
 }
