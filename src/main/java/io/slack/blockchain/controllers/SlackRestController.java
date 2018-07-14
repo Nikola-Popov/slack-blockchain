@@ -28,8 +28,6 @@ public class SlackRestController {
 			@RequestParam("text") final String cryptoCurrencyAddress) {
 		userService.process(
 				SlackUser.builder().userId(userId).teamId(teamId).cryptoCurrencyAddress(cryptoCurrencyAddress).build());
-		// return ok(buildJsonResponse(
-		// AttachmentResponse.builder().text(ADDRESS_CONFIGURED_RESPONSE_MESSAGE).color(WARNING).build()));
 	}
 
 	@PostMapping(path = "/transaction", produces = APPLICATION_JSON_UTF8_VALUE)
