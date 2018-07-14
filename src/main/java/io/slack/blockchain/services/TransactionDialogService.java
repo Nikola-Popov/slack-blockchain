@@ -1,14 +1,10 @@
 package io.slack.blockchain.services;
 
-import static org.springframework.http.ResponseEntity.badRequest;
-import static org.springframework.http.ResponseEntity.ok;
-
 import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.github.seratch.jslack.Slack;
@@ -18,18 +14,14 @@ import com.github.seratch.jslack.api.methods.request.users.UsersListRequest;
 import com.github.seratch.jslack.api.model.User;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
-import com.google.gson.JsonSyntaxException;
 
 import io.slack.blockchain.commons.factories.SlackFactory;
 import io.slack.blockchain.commons.utils.converters.UserConverter;
-import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
 import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogFactory;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
-import io.slack.blockchain.interactive.components.dialogs.parsers.TransactionSubmissionDialogParser;
 
 @Service
 public class TransactionDialogService {
-	private static final String INVALID_AMOUNT_RESPONSE_MESSAGE = "Invalid amount type specified. Please, note that only numbers are allowed!";
 	private static final String SUCESSFUL_TRANSACTION_RESPONSE_MESSAGE = "All good to go! You have sucessfuly commited a transaction.";
 
 	@Value("${slack.oauth.token}")
@@ -43,9 +35,6 @@ public class TransactionDialogService {
 
 	@Autowired
 	private SlackTransactionsDialogFactory slackTransactionDialogFactory;
-
-	@Autowired
-	private TransactionSubmissionDialogParser transactionSubmissionDialogParser;
 
 	public void openTransactionDialog(final String triggerId) {
 		try {
@@ -62,16 +51,4 @@ public class TransactionDialogService {
 			throw new DialogOpenException(exception);
 		}
 	}
-
-	public ResponseEntity<String> processSubmissionDialogData(final String payload) {
-		try {
-			final TransactionDialogSubmission transactionDialogSubmission = transactionSubmissionDialogParser
-					.parseSubmittedData(payload);
-			System.out.println(transactionDialogSubmission);
-		} catch (JsonSyntaxException numberFormatException) {
-			return badRequest().body(INVALID_AMOUNT_RESPONSE_MESSAGE);
-		}
-		return ok(SUCESSFUL_TRANSACTION_RESPONSE_MESSAGE);
-	}
-
 }
