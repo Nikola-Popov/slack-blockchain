@@ -1,4 +1,4 @@
-package io.slack.blockchain.domain;
+package io.slack.blockchain.domain.dialog;
 
 import lombok.Builder;
 import lombok.Data;

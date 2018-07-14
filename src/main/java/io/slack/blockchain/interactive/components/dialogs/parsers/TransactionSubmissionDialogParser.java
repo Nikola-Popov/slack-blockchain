@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
-import io.slack.blockchain.domain.TransactionDialogSubmission;
+import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
 
 @Component
 public class TransactionSubmissionDialogParser {
