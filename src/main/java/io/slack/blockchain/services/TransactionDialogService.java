@@ -1,11 +1,11 @@
 package io.slack.blockchain.services;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.github.seratch.jslack.Slack;
@@ -18,9 +18,8 @@ import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
 import io.slack.blockchain.commons.factories.SlackFactory;
 import io.slack.blockchain.commons.utils.converters.UserConverter;
-import io.slack.blockchain.domain.attachments.AttachmentResponse;
-import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogFactory;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
+import io.slack.blockchain.interactive.components.dialogs.factories.SlackTransactionsDialogFactory;
 import io.slack.blockchain.processors.SubmittedTransactionProcessor;
 
 @Service
@@ -56,7 +55,7 @@ public class TransactionDialogService {
 		}
 	}
 
-	public ResponseEntity<AttachmentResponse> processTransaction(final String payload) {
-		return submittedTransactionProcessor.processSubmissionDialogData(payload);
+	public void processTransaction(final String payload) throws URISyntaxException {
+		submittedTransactionProcessor.processSubmissionDialogData(payload);
 	}
 }

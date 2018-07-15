@@ -3,6 +3,8 @@ package io.slack.blockchain.controllers;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
+import java.net.URISyntaxException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +40,7 @@ public class SlackRestController {
 	}
 
 	@PostMapping(path = "/transaction/submit", produces = APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<AttachmentResponse> submitTransaction(@RequestParam("payload") final String payload) {
-		return transactionDialogService.processTransaction(payload);
+	public void submitTransaction(@RequestParam("payload") final String payload) throws URISyntaxException {
+		transactionDialogService.processTransaction(payload);
 	}
 }

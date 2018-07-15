@@ -9,4 +9,5 @@ public class TransactionDialogSubmission {
 	private int amount;
 	private String currency;
 	private String user;
+	private String responseUrl;
 }

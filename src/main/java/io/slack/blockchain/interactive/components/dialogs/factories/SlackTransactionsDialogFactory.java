@@ -1,4 +1,4 @@
-package io.slack.blockchain.interactive.components.dialogs;
+package io.slack.blockchain.interactive.components.dialogs.factories;
 
 import static com.github.seratch.jslack.api.model.dialog.DialogSubType.NUMBER;
 import static io.slack.blockchain.domain.dialog.Currency.BCH;
