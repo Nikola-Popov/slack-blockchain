@@ -29,8 +29,12 @@ public class TransactionSubmittedDialogResponder {
 		final AttachmentResponse attachmentResponse = attachmentResponseFactory.createAttachmentResponse(
 				Attachment.builder().text(SUCESSFUL_TRANSACTION_RESPONSE_MESSAGE).status(GOOD).build());
 
-		final RequestEntity<AttachmentResponse> requestEntity = RequestEntity.post(new URI(responseUrl))
-				.contentType(APPLICATION_JSON_UTF8).body(attachmentResponse);
+		final RequestEntity<AttachmentResponse> requestEntity = buildRequestEntity(responseUrl, attachmentResponse);
 		restTemplate.exchange(requestEntity, Void.class);
+	}
+
+	RequestEntity<AttachmentResponse> buildRequestEntity(final String responseUrl,
+			final AttachmentResponse attachmentResponse) throws URISyntaxException {
+		return RequestEntity.post(new URI(responseUrl)).contentType(APPLICATION_JSON_UTF8).body(attachmentResponse);
 	}
 }
