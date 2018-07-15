@@ -38,5 +38,4 @@ public class SlackTransactionDialogExceptionHandler {
 		return badRequest().body(attachmentResponseFactory.createAttachmentResponse(
 				Attachment.builder().text(INVALID_AMOUNT_RESPONSE_MESSAGE).status(DANGER).build()));
 	}
-
 }

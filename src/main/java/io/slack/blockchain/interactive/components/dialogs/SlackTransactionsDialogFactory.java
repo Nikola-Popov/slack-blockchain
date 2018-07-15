@@ -1,5 +1,6 @@
 package io.slack.blockchain.interactive.components.dialogs;
 
+import static com.github.seratch.jslack.api.model.dialog.DialogSubType.NUMBER;
 import static io.slack.blockchain.domain.dialog.Currency.BCH;
 import static io.slack.blockchain.domain.dialog.Currency.BTC;
 import static io.slack.blockchain.domain.dialog.Currency.ETC;
@@ -47,7 +48,7 @@ public class SlackTransactionsDialogFactory {
 
 	private DialogTextElement buildAmountTextElement() {
 		return DialogTextElement.builder().label(AMOUNT_LABEL).name(AMOUNT_LABEL.toLowerCase())
-				.placeholder(AMOUNT_ELEMENT_LABEL).maxLength(TEXT_ELEMENT_MAX_ELEMENT_LENGTH).build();
+				.placeholder(AMOUNT_ELEMENT_LABEL).maxLength(TEXT_ELEMENT_MAX_ELEMENT_LENGTH).subtype(NUMBER).build();
 	}
 
 	private DialogSelectElement buildCurrencySelectElement() {

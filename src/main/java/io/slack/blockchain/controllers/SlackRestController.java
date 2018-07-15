@@ -27,7 +27,6 @@ public class SlackRestController {
 	public ResponseEntity<AttachmentResponse> configureAddress(@RequestParam("trigger_id") final String triggerId,
 			@RequestParam("user_id") final String userId, @RequestParam("team_id") final String teamId,
 			@RequestParam("text") final String cryptoCurrencyAddress) {
-
 		return ok(userService.process(SlackUser.builder().userId(userId).teamId(teamId)
 				.cryptoCurrencyAddress(cryptoCurrencyAddress).build()));
 	}
@@ -39,7 +38,7 @@ public class SlackRestController {
 	}
 
 	@PostMapping(path = "/transaction/submit", produces = APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<String> submitTransaction(@RequestParam("payload") final String payload) {
+	public ResponseEntity<AttachmentResponse> submitTransaction(@RequestParam("payload") final String payload) {
 		return transactionDialogService.processTransaction(payload);
 	}
 }
