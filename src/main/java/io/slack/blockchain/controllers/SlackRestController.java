@@ -40,6 +40,6 @@ public class SlackRestController {
 
 	@PostMapping(path = "/transaction/submit", produces = APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<String> submitTransaction(@RequestParam("payload") final String payload) {
-		return transactionDialogService.processSubmissionDialogData(payload);
+		return transactionDialogService.processTransaction(payload);
 	}
 }

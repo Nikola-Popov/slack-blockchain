@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.github.seratch.jslack.Slack;
@@ -17,13 +18,13 @@ import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
 import io.slack.blockchain.commons.factories.SlackFactory;
 import io.slack.blockchain.commons.utils.converters.UserConverter;
+import io.slack.blockchain.domain.attachments.AttachmentResponse;
 import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogFactory;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
+import io.slack.blockchain.processors.SubmittedTransactionProcessor;
 
 @Service
 public class TransactionDialogService {
-	private static final String SUCESSFUL_TRANSACTION_RESPONSE_MESSAGE = "All good to go! You have sucessfuly commited a transaction.";
-
 	@Value("${slack.oauth.token}")
 	private String token;
 
@@ -35,6 +36,9 @@ public class TransactionDialogService {
 
 	@Autowired
 	private SlackTransactionsDialogFactory slackTransactionDialogFactory;
+
+	@Autowired
+	private SubmittedTransactionProcessor submittedTransactionProcessor;
 
 	public void openTransactionDialog(final String triggerId) {
 		try {
@@ -50,5 +54,9 @@ public class TransactionDialogService {
 		} catch (IOException | SlackApiException exception) {
 			throw new DialogOpenException(exception);
 		}
+	}
+
+	public ResponseEntity<AttachmentResponse> processTransaction(final String payload) {
+		return submittedTransactionProcessor.processSubmissionDialogData(payload);
 	}
 }

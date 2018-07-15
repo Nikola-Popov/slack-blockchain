@@ -29,7 +29,7 @@ public class SlackTransactionsDialogFactory {
 	private static final String CURRENCY_ELEMENT_LABEL = "Currency";
 
 	private static final int TEXT_ELEMENT_MAX_ELEMENT_LENGTH = 100;
-	private static final String SEND_BUTTON_LABEL = "Send";
+	private static final String CREATE_BUTTON_LABEL = "Create";
 	private static final String TRANSACTION_DIALOG_CALLBACK_ID = "transaction-dialog";
 	private static final String TRANSACTION_DIALOG_TITlE = "New transaction";
 
@@ -42,7 +42,7 @@ public class SlackTransactionsDialogFactory {
 
 		return Dialog.builder().title(TRANSACTION_DIALOG_TITlE).callbackId(TRANSACTION_DIALOG_CALLBACK_ID)
 				.elements(asList(amountTextElement, currencySelectElement, usersSelectElement))
-				.submitLabel(SEND_BUTTON_LABEL).build();
+				.submitLabel(CREATE_BUTTON_LABEL).build();
 	}
 
 	private DialogTextElement buildAmountTextElement() {
