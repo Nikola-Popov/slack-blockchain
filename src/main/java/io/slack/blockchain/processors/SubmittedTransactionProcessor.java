@@ -20,7 +20,6 @@ public class SubmittedTransactionProcessor {
 	public void processSubmissionDialogData(final String payload) throws URISyntaxException {
 		final TransactionDialogSubmission transactionDialogSubmission = transactionSubmissionDialogParser
 				.parseSubmittedData(payload);
-		System.out.println("=====> " + transactionDialogSubmission);
 		transactionSubmittedDialogResponder.respond(transactionDialogSubmission.getResponseUrl());
 	}
 }
