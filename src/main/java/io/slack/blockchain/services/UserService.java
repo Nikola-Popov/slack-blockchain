@@ -23,7 +23,6 @@ public class UserService {
 
 	public AttachmentResponse process(final SlackUser slackUser) {
 		slackUsersRepository.save(slackUser);
-		System.out.println(slackUsersRepository.findAll());
 		return attachmentResponseFactory.createAttachmentResponse(
 				Attachment.builder().text(ADDRESS_CONFIGURED_RESPONSE_MESSAGE).status(GOOD).build());
 	}

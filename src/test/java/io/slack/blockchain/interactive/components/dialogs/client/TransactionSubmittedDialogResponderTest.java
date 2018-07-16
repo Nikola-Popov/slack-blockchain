@@ -1,6 +1,6 @@
 package io.slack.blockchain.interactive.components.dialogs.client;
 
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -8,12 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.RequestEntity;
 import org.springframework.web.client.RestTemplate;
 
 import io.slack.blockchain.commons.factories.AttachmentResponseFactory;
+import io.slack.blockchain.commons.factories.http.RequestEntityFactory;
 import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
 
@@ -22,33 +22,32 @@ public class TransactionSubmittedDialogResponderTest {
 	private static final String RESPONSE_URL = "responseUrl";
 
 	@InjectMocks
-	@Spy
 	private TransactionSubmittedDialogResponder transactionSubmittedDialogResponder;
 
 	@Mock
-	private RestTemplate restTemplate;
+	private RestTemplate restTemplateMock;
 
 	@Mock
-	private AttachmentResponseFactory attachmentResponseFactory;
+	private AttachmentResponseFactory attachmentResponseFactoryMock;
 
 	@Mock
-	private Attachment attachment;
-
-	@Mock
-	private AttachmentResponse attachmentResponse;
+	private AttachmentResponse attachmentResponseMock;
 
 	@Mock
 	private RequestEntity<AttachmentResponse> requestEntityMock;
 
+	@Mock
+	private RequestEntityFactory requestEntityFactoryMock;
+
 	@Test
 	public void testRespond() throws Exception {
-		when(attachmentResponseFactory.createAttachmentResponse(attachment)).thenReturn(attachmentResponse);
-
-		doReturn(requestEntityMock).when(transactionSubmittedDialogResponder).buildRequestEntity(RESPONSE_URL,
-				attachmentResponse);
+		when(attachmentResponseFactoryMock.createAttachmentResponse(any(Attachment.class)))
+				.thenReturn(attachmentResponseMock);
+		when(requestEntityFactoryMock.createPostRequestEntity(RESPONSE_URL, attachmentResponseMock))
+				.thenReturn(requestEntityMock);
 
 		transactionSubmittedDialogResponder.respond(RESPONSE_URL);
 
-		verify(restTemplate).exchange(requestEntityMock, Void.class);
+		verify(restTemplateMock).exchange(requestEntityMock, Void.class);
 	}
 }

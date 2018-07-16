@@ -25,7 +25,7 @@ import io.slack.blockchain.utils.converters.UserConverter;
 @Service
 public class TransactionDialogService {
 	@Value("${slack.oauth.token}")
-	private String token;
+	private String slackOauthToken;
 
 	@Autowired
 	private SlackFactory slackFactory;
@@ -42,14 +42,14 @@ public class TransactionDialogService {
 	public void openTransactionDialog(final String triggerId) {
 		try {
 			final Slack slack = slackFactory.createSlack();
-			final List<User> users = slack.methods().usersList(UsersListRequest.builder().token(token).build())
-					.getMembers();
+			final List<User> users = slack.methods()
+					.usersList(UsersListRequest.builder().token(slackOauthToken).build()).getMembers();
 
 			final List<DialogOption> usersDialogOptions = userConverter.convert(users);
 			final Dialog dialog = slackTransactionDialogFactory.createTransactionsDialog(usersDialogOptions);
 
-			slack.methods()
-					.dialogOpen(DialogOpenRequest.builder().token(token).triggerId(triggerId).dialog(dialog).build());
+			slack.methods().dialogOpen(
+					DialogOpenRequest.builder().token(slackOauthToken).triggerId(triggerId).dialog(dialog).build());
 		} catch (IOException | SlackApiException exception) {
 			throw new DialogOpenException(exception);
 		}

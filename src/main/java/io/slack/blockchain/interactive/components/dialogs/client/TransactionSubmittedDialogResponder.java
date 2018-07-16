@@ -1,9 +1,7 @@
 package io.slack.blockchain.interactive.components.dialogs.client;
 
 import static io.slack.blockchain.domain.attachments.Status.GOOD;
-import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 
-import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import io.slack.blockchain.commons.factories.AttachmentResponseFactory;
+import io.slack.blockchain.commons.factories.http.RequestEntityFactory;
 import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
 
@@ -25,16 +24,14 @@ public class TransactionSubmittedDialogResponder {
 	@Autowired
 	private AttachmentResponseFactory attachmentResponseFactory;
 
+	@Autowired
+	private RequestEntityFactory requestEntityFactory;
+
 	public void respond(final String responseUrl) throws URISyntaxException {
 		final AttachmentResponse attachmentResponse = attachmentResponseFactory.createAttachmentResponse(
 				Attachment.builder().text(SUCESSFUL_TRANSACTION_RESPONSE_MESSAGE).status(GOOD).build());
-
-		final RequestEntity<AttachmentResponse> requestEntity = buildRequestEntity(responseUrl, attachmentResponse);
+		final RequestEntity<AttachmentResponse> requestEntity = requestEntityFactory
+				.createPostRequestEntity(responseUrl, attachmentResponse);
 		restTemplate.exchange(requestEntity, Void.class);
-	}
-
-	RequestEntity<AttachmentResponse> buildRequestEntity(final String responseUrl,
-			final AttachmentResponse attachmentResponse) throws URISyntaxException {
-		return RequestEntity.post(new URI(responseUrl)).contentType(APPLICATION_JSON_UTF8).body(attachmentResponse);
 	}
 }

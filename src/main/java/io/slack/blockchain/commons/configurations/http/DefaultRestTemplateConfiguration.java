@@ -1,4 +1,4 @@
-package io.slack.blockchain.commons.configurations;
+package io.slack.blockchain.commons.configurations.http;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

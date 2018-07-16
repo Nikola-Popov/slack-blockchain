@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class TransactionDialogSubmission {
 	private int amount;
-	private String currency;
+	private Currency currency;
 	private String user;
 	private String responseUrl;
 }
