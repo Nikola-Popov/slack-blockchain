@@ -17,8 +17,8 @@ import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
 import io.slack.blockchain.commons.factories.SlackFactory;
+import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogDisplayer;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
-import io.slack.blockchain.interactive.components.dialogs.factories.SlackTransactionsDialogFactory;
 import io.slack.blockchain.processors.SubmittedTransactionProcessor;
 import io.slack.blockchain.utils.converters.UserConverter;
 
@@ -34,7 +34,7 @@ public class TransactionDialogService {
 	private UserConverter userConverter;
 
 	@Autowired
-	private SlackTransactionsDialogFactory slackTransactionDialogFactory;
+	private SlackTransactionsDialogDisplayer slackTransactionDialogFactory;
 
 	@Autowired
 	private SubmittedTransactionProcessor submittedTransactionProcessor;
