@@ -1,7 +1,7 @@
 package io.slack.blockchain.interactive.components.dialogs.parsers;
 
-import static io.slack.blockchain.interactive.components.dialogs.constants.SubmittedDialogConstants.RESPONSE_URL;
-import static io.slack.blockchain.interactive.components.dialogs.constants.SubmittedDialogConstants.SUBMISSION;
+import static io.slack.blockchain.interactive.components.dialogs.parsers.constants.SubmittedDialogConstants.RESPONSE_URL;
+import static io.slack.blockchain.interactive.components.dialogs.parsers.constants.SubmittedDialogConstants.SUBMISSION;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

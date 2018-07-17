@@ -29,7 +29,7 @@ import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
 import io.slack.blockchain.commons.factories.SlackFactory;
-import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogDisplayer;
+import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogProvider;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.processors.SubmittedTransactionProcessor;
 import io.slack.blockchain.utils.converters.UserConverter;
@@ -52,7 +52,7 @@ public class TransactionDialogServiceTest {
 	private UserConverter userConverterMock;
 
 	@Mock
-	private SlackTransactionsDialogDisplayer slackTransactionDialogFactoryMock;
+	private SlackTransactionsDialogProvider slackTransactionDialogFactoryMock;
 
 	@Mock
 	private SubmittedTransactionProcessor submittedTransactionProcessorMock;
