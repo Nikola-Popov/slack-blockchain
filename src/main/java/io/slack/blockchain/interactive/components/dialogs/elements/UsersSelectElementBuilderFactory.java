@@ -8,7 +8,7 @@ import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
 @Component
 public class UsersSelectElementBuilderFactory {
-	public UsersSelectElementBuilder createUsersSelectElementBuilder(final List<DialogOption> usersDialogOptions) {
-		return new UsersSelectElementBuilder(usersDialogOptions);
+	public UsersSelectElementBuilderImpl createUsersSelectElementBuilder(final List<DialogOption> usersDialogOptions) {
+		return new UsersSelectElementBuilderImpl(usersDialogOptions);
 	}
 }

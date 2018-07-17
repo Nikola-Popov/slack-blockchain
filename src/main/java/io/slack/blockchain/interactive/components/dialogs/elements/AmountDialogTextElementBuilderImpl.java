@@ -11,7 +11,7 @@ import com.github.seratch.jslack.api.model.dialog.DialogElement;
 import com.github.seratch.jslack.api.model.dialog.DialogTextElement;
 
 @Component
-public class AmountDialogTextElementBuilder implements DialogElementBuilder {
+public class AmountDialogTextElementBuilderImpl implements DialogElementBuilder {
 	@Override
 	public DialogElement build() {
 		return DialogTextElement.builder().label(AMOUNT_LABEL).name(AMOUNT_LABEL.toLowerCase())

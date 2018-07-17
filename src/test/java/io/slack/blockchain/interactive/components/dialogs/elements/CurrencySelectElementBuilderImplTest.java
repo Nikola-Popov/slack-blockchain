@@ -20,11 +20,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 
-import io.slack.blockchain.interactive.components.dialogs.elements.CurrencySelectElementBuilder;
+import io.slack.blockchain.interactive.components.dialogs.elements.CurrencySelectElementBuilderImpl;
 import io.slack.blockchain.interactive.components.dialogs.elements.utils.CurrenciesProvider;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CurrencySelectElementBuilderTest {
+public class CurrencySelectElementBuilderImplTest {
 	private static final List<DialogOption> CURRENCIES = asList(
 			DialogOption.builder().label("labelCurrency").value("valueCurrency").build());
 
@@ -33,7 +33,7 @@ public class CurrencySelectElementBuilderTest {
 			.placeholder(CURRENCY_ELEMENT_PLACEHOLDER).options(CURRENCIES).build();
 
 	@InjectMocks
-	private CurrencySelectElementBuilder currencySelectElementBuilder;
+	private CurrencySelectElementBuilderImpl currencySelectElementBuilder;
 
 	@Mock
 	private CurrenciesProvider currenciesProviderMock;

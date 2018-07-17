@@ -13,24 +13,24 @@ import org.springframework.stereotype.Component;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
-import io.slack.blockchain.interactive.components.dialogs.elements.AmountDialogTextElementBuilder;
-import io.slack.blockchain.interactive.components.dialogs.elements.CurrencySelectElementBuilder;
-import io.slack.blockchain.interactive.components.dialogs.elements.UsersSelectElementBuilder;
+import io.slack.blockchain.interactive.components.dialogs.elements.AmountDialogTextElementBuilderImpl;
+import io.slack.blockchain.interactive.components.dialogs.elements.CurrencySelectElementBuilderImpl;
+import io.slack.blockchain.interactive.components.dialogs.elements.UsersSelectElementBuilderImpl;
 import io.slack.blockchain.interactive.components.dialogs.elements.UsersSelectElementBuilderFactory;
 
 @Component
 public class SlackTransactionsDialogProvider {
 	@Autowired
-	private CurrencySelectElementBuilder currencySelectElementBuilder;
+	private CurrencySelectElementBuilderImpl currencySelectElementBuilder;
 
 	@Autowired
-	private AmountDialogTextElementBuilder amountDialogTextElementBuilder;
+	private AmountDialogTextElementBuilderImpl amountDialogTextElementBuilder;
 
 	@Autowired
 	private UsersSelectElementBuilderFactory usersSelectElementBuilderFactory;
 
 	public Dialog createTransactionsDialog(final List<DialogOption> usersDialogOptions) {
-		final UsersSelectElementBuilder usersSelectElementBuilder = usersSelectElementBuilderFactory
+		final UsersSelectElementBuilderImpl usersSelectElementBuilder = usersSelectElementBuilderFactory
 				.createUsersSelectElementBuilder(usersDialogOptions);
 		return Dialog.builder().title(TRANSACTION_DIALOG_TITlE).callbackId(TRANSACTION_DIALOG_CALLBACK_ID)
 				.elements(asList(amountDialogTextElementBuilder.build(), currencySelectElementBuilder.build(),

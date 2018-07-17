@@ -15,10 +15,8 @@ import org.junit.Test;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 
-import io.slack.blockchain.interactive.components.dialogs.elements.UsersSelectElementBuilder;
-
-public class UsersSelectElementBuilderTest {
-	private UsersSelectElementBuilder usersSelectElementBuilder;
+public class UsersSelectElementBuilderImplTest {
+	private UsersSelectElementBuilderImpl usersSelectElementBuilder;
 
 	private final static List<DialogOption> USERS_DIALOG_OPTIONS = createUsersDialogOptions();
 
@@ -28,7 +26,7 @@ public class UsersSelectElementBuilderTest {
 
 	@Before
 	public void setup() {
-		usersSelectElementBuilder = new UsersSelectElementBuilder(USERS_DIALOG_OPTIONS);
+		usersSelectElementBuilder = new UsersSelectElementBuilderImpl(USERS_DIALOG_OPTIONS);
 	}
 
 	@Test

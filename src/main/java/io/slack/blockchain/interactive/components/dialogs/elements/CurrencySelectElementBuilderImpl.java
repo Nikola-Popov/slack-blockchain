@@ -12,7 +12,7 @@ import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 import io.slack.blockchain.interactive.components.dialogs.elements.utils.CurrenciesProvider;
 
 @Component
-public class CurrencySelectElementBuilder implements DialogElementBuilder {
+public class CurrencySelectElementBuilderImpl implements DialogElementBuilder {
 	@Autowired
 	private CurrenciesProvider currenciesProvider;
 

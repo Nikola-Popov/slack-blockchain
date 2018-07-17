@@ -12,7 +12,7 @@ import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class UsersSelectElementBuilder implements DialogElementBuilder {
+public class UsersSelectElementBuilderImpl implements DialogElementBuilder {
 	private final List<DialogOption> usersDialogOptions;
 
 	@Override
