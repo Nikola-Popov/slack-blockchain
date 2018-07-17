@@ -5,31 +5,31 @@ import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.FieldNamingStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.internal.Excluder;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
-@Component
-public class GsonJsonProvider {
-	private JsonParser jsonParser;
-	private Gson gson;
+import io.slack.blockchain.commons.factories.json.GsonFactory;
+import io.slack.blockchain.commons.factories.json.JsonParserFactory;
 
-	public GsonJsonProvider() {
-		this.gson = new Gson();
-		this.jsonParser = new JsonParser();
-	}
+@Component
+public class GsonJsonService {
+	@Autowired
+	private GsonFactory gsonFactory;
+
+	@Autowired
+	private JsonParserFactory jsonParserFactory;
+
+	private final JsonParser jsonParser = jsonParserFactory.createJsonParser();
+	private final Gson gson = gsonFactory.createGson();
 
 	public JsonElement parse(String json) throws JsonSyntaxException {
 		return jsonParser.parse(json);
@@ -47,32 +47,8 @@ public class GsonJsonProvider {
 		return gson.newBuilder();
 	}
 
-	public Excluder excluder() {
-		return gson.excluder();
-	}
-
-	public FieldNamingStrategy fieldNamingStrategy() {
-		return gson.fieldNamingStrategy();
-	}
-
 	public boolean serializeNulls() {
 		return gson.serializeNulls();
-	}
-
-	public boolean htmlSafe() {
-		return gson.htmlSafe();
-	}
-
-	public <T> TypeAdapter<T> getAdapter(TypeToken<T> type) {
-		return gson.getAdapter(type);
-	}
-
-	public <T> TypeAdapter<T> getDelegateAdapter(TypeAdapterFactory skipPast, TypeToken<T> type) {
-		return gson.getDelegateAdapter(skipPast, type);
-	}
-
-	public <T> TypeAdapter<T> getAdapter(Class<T> type) {
-		return gson.getAdapter(type);
 	}
 
 	public JsonElement toJsonTree(Object src) {
