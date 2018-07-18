@@ -17,19 +17,13 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
-import io.slack.blockchain.commons.factories.json.GsonFactory;
-import io.slack.blockchain.commons.factories.json.JsonParserFactory;
-
 @Component
 public class GsonJsonService {
 	@Autowired
-	private GsonFactory gsonFactory;
+	private Gson gson;
 
 	@Autowired
-	private JsonParserFactory jsonParserFactory;
-
-	private final JsonParser jsonParser = jsonParserFactory.createJsonParser();
-	private final Gson gson = gsonFactory.createGson();
+	private JsonParser jsonParser;
 
 	public JsonElement parse(String json) throws JsonSyntaxException {
 		return jsonParser.parse(json);

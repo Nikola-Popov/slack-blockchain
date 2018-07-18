@@ -15,8 +15,8 @@ import org.junit.Test;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 
-public class UsersSelectElementBuilderImplTest {
-	private UsersSelectElementBuilderImpl usersSelectElementBuilder;
+public class UsersSelectElementTest {
+	private UsersSelectElement usersSelectElement;
 
 	private final static List<DialogOption> USERS_DIALOG_OPTIONS = createUsersDialogOptions();
 
@@ -26,12 +26,12 @@ public class UsersSelectElementBuilderImplTest {
 
 	@Before
 	public void setup() {
-		usersSelectElementBuilder = new UsersSelectElementBuilderImpl(USERS_DIALOG_OPTIONS);
+		usersSelectElement = new UsersSelectElement();
 	}
 
 	@Test
-	public void testBuild() {
-		assertThat(usersSelectElementBuilder.build(), equalTo(DIALOG_SELECT_ELEMENT));
+	public void testUsersSelectElementIsCorrectlyConstructed() {
+		assertThat(usersSelectElement.constructBasedOn(USERS_DIALOG_OPTIONS), equalTo(DIALOG_SELECT_ELEMENT));
 	}
 
 	private static List<DialogOption> createUsersDialogOptions() {

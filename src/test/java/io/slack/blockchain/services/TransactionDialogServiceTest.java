@@ -15,7 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.methods.MethodsClient;
@@ -28,13 +28,12 @@ import com.github.seratch.jslack.api.model.User;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
-import io.slack.blockchain.commons.factories.SlackFactory;
 import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogProvider;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.processors.SubmittedTransactionProcessor;
 import io.slack.blockchain.utils.converters.UserConverter;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
 public class TransactionDialogServiceTest {
 	private static final String SLACK_OAUTH_TOKEN_FIELD_NAME = "slackOauthToken";
 	private static final String SLACK_OUATH_TOKEN = "slack-oauth-token";
@@ -46,7 +45,7 @@ public class TransactionDialogServiceTest {
 	private TransactionDialogService transactionDialogService;
 
 	@Mock
-	private SlackFactory slackFactoryMock;
+	private Slack slack;
 
 	@Mock
 	private UserConverter userConverterMock;
@@ -77,7 +76,6 @@ public class TransactionDialogServiceTest {
 
 	@Before
 	public void setup() throws Exception {
-		when(slackFactoryMock.createSlack()).thenReturn(slackMock);
 		when(slackMock.methods()).thenReturn(methodsClientMock);
 		when(methodsClientMock.usersList(any(UsersListRequest.class))).thenReturn(usersListResponseMock);
 		when(usersListResponseMock.getMembers()).thenReturn(users);
