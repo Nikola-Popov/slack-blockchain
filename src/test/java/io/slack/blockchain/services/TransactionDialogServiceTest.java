@@ -15,6 +15,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.seratch.jslack.Slack;
@@ -34,6 +36,7 @@ import io.slack.blockchain.processors.SubmittedTransactionProcessor;
 import io.slack.blockchain.utils.converters.UserConverter;
 
 @RunWith(SpringRunner.class)
+@SpringBootTest
 public class TransactionDialogServiceTest {
 	private static final String SLACK_OAUTH_TOKEN_FIELD_NAME = "slackOauthToken";
 	private static final String SLACK_OUATH_TOKEN = "slack-oauth-token";
@@ -44,7 +47,7 @@ public class TransactionDialogServiceTest {
 	@InjectMocks
 	private TransactionDialogService transactionDialogService;
 
-	@Mock
+	@MockBean
 	private Slack slack;
 
 	@Mock
