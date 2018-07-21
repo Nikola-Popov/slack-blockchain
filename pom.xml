@@ -60,6 +60,6 @@
 
 	<modules>
 		<module>slack-app</module>
-		<module>blockchain-client</module>
+		<module>transaction-broker</module>
 	</modules>
 </project>
