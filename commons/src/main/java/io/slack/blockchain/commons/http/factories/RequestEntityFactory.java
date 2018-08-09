@@ -1,4 +1,4 @@
-package io.slack.blockchain.commons.factories.http;
+package io.slack.blockchain.commons.http.factories;
 
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;

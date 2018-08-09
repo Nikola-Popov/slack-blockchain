@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import io.slack.blockchain.commons.factories.AttachmentResponseFactory;
-import io.slack.blockchain.commons.factories.http.RequestEntityFactory;
+import io.slack.blockchain.commons.http.factories.RequestEntityFactory;
 import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
 

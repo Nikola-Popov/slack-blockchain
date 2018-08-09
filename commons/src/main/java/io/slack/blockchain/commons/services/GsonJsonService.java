@@ -1,4 +1,4 @@
-package io.slack.blockchain.commons;
+package io.slack.blockchain.commons.services;
 
 import java.io.IOException;
 import java.io.Reader;

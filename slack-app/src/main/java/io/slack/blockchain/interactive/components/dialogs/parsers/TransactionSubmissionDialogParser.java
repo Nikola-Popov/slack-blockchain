@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.JsonObject;
 
-import io.slack.blockchain.commons.GsonJsonService;
+import io.slack.blockchain.commons.services.GsonJsonService;
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
 
 @Component
