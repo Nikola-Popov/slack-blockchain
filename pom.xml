@@ -53,5 +53,6 @@
 		<module>commons</module>
 		<module>slack-app</module>
 		<module>transaction-broker</module>
+		<module>demo</module>
 	</modules>
 </project>

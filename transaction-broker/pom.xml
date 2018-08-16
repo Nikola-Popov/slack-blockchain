@@ -11,6 +11,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>io.slack.blockchain</groupId>
+			<artifactId>commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>com.coinbase.api</groupId>
 			<artifactId>coinbase-java</artifactId>
 			<version>1.10.0</version>
