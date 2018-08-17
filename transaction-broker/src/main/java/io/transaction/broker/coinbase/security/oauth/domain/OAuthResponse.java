@@ -1,4 +1,4 @@
-package io.transaction.broker.security;
+package io.transaction.broker.coinbase.security.oauth.domain;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Builder
 @Getter
 @Setter
-public class CoinbaseOauthAuthorizationResponse {
+public class OAuthResponse {
 	@SerializedName("access_token")
 	@Expose
 	public String accessToken;

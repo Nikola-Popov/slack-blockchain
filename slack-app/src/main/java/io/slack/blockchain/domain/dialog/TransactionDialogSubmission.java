@@ -1,5 +1,6 @@
 package io.slack.blockchain.domain.dialog;
 
+import io.slack.blockchain.commons.miscellaneous.trading.Currency;
 import lombok.Builder;
 import lombok.Data;
 

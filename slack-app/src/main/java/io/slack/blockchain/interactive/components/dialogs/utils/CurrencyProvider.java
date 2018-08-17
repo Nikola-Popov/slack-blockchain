@@ -1,10 +1,10 @@
 package io.slack.blockchain.interactive.components.dialogs.utils;
 
-import static io.slack.blockchain.domain.dialog.Currency.BCH;
-import static io.slack.blockchain.domain.dialog.Currency.BTC;
-import static io.slack.blockchain.domain.dialog.Currency.ETC;
-import static io.slack.blockchain.domain.dialog.Currency.GBP;
-import static io.slack.blockchain.domain.dialog.Currency.USD;
+import static io.slack.blockchain.commons.miscellaneous.trading.Currency.BCH;
+import static io.slack.blockchain.commons.miscellaneous.trading.Currency.BTC;
+import static io.slack.blockchain.commons.miscellaneous.trading.Currency.ETC;
+import static io.slack.blockchain.commons.miscellaneous.trading.Currency.GBP;
+import static io.slack.blockchain.commons.miscellaneous.trading.Currency.USD;
 import static java.util.Arrays.asList;
 
 import java.util.List;

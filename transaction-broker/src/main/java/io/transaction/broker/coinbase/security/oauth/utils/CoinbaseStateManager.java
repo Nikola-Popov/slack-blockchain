@@ -1,4 +1,4 @@
-package io.transaction.broker.security;
+package io.transaction.broker.coinbase.security.oauth.utils;
 
 import static java.util.UUID.randomUUID;
 

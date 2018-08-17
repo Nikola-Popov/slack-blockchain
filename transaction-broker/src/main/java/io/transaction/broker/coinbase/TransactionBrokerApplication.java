@@ -1,4 +1,4 @@
-package io.transaction.broker;
+package io.transaction.broker.coinbase;
 
 import java.net.URISyntaxException;
 
