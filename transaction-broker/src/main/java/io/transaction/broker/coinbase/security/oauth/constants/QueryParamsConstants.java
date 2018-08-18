@@ -22,4 +22,10 @@ public final class QueryParamsConstants {
 	public static final String AUTHORIZATION_CODE = "authorization_code";
 
 	public static final String EXPIRE_EVERYDAY = "day";
+
+	public static final String SCOPE = "scope";
+
+	public static final String STATE = "state";
+
+	public static final String CODE = "code";
 }
