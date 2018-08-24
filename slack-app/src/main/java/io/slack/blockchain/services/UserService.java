@@ -13,7 +13,7 @@ import io.slack.blockchain.repositories.SlackUsersRepository;
 
 @Service
 public class UserService {
-	private static final String ADDRESS_CONFIGURED_RESPONSE_MESSAGE = "Bitcoin address configured successfuly!\nYou are now able to make transactions.";
+	private static final String ADDRESS_CONFIGURED_RESPONSE_MESSAGE = "Coinbase email configured successfuly!\nYou are now able to make transactions.";
 
 	@Autowired
 	private SlackUsersRepository slackUsersRepository;

@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.AUTO;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,5 +26,6 @@ public class SlackUser {
 
 	private String teamId;
 
-	private String cryptoCurrencyAddress;
+	@Email
+	private String email;
 }

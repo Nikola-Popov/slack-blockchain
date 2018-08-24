@@ -15,3 +15,5 @@ bin/
 .springBeans
 .sts4-cache
 
+**application.properties
+**coinbase.properties

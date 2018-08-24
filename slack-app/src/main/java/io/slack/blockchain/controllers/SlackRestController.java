@@ -25,12 +25,11 @@ public class SlackRestController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping(path = "/configure/address", produces = APPLICATION_JSON_UTF8_VALUE)
+	@PostMapping(path = "/configure/email", produces = APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<AttachmentResponse> configureAddress(@RequestParam("trigger_id") final String triggerId,
 			@RequestParam("user_id") final String userId, @RequestParam("team_id") final String teamId,
-			@RequestParam("text") final String cryptoCurrencyAddress) {
-		return ok(userService.process(SlackUser.builder().userId(userId).teamId(teamId)
-				.cryptoCurrencyAddress(cryptoCurrencyAddress).build()));
+			@RequestParam("text") final String email) {
+		return ok(userService.process(SlackUser.builder().userId(userId).teamId(teamId).email(email).build()));
 	}
 
 	@PostMapping(path = "/transaction", produces = APPLICATION_JSON_UTF8_VALUE)
