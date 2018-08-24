@@ -1,4 +1,4 @@
-package io.transaction.broker.coinbase.security.oauth.client;
+package io.slack.blockchain.coinbase.security.oauth.client;
 
 import static org.springframework.http.HttpHeaders.LOCATION;
 import static org.springframework.http.HttpStatus.MOVED_PERMANENTLY;
@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import io.transaction.broker.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
-import io.transaction.broker.coinbase.security.oauth.utils.CoinbaseStateManager;
+import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
+import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseStateManager;
 
 @Component
 public class CoinbaseAuthorizationClient {

@@ -18,11 +18,11 @@ import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TransactionSubmittedDialogResponderTest {
+public class TransactionDialogResponderTest {
 	private static final String RESPONSE_URL = "responseUrl";
 
 	@InjectMocks
-	private TransactionSubmittedDialogResponder transactionSubmittedDialogResponder;
+	private TransactionDialogResponder transactionDialogResponder;
 
 	@Mock
 	private RestTemplate restTemplateMock;
@@ -46,7 +46,7 @@ public class TransactionSubmittedDialogResponderTest {
 		when(requestEntityFactoryMock.createPostRequestEntity(RESPONSE_URL, attachmentResponseMock))
 				.thenReturn(requestEntityMock);
 
-		transactionSubmittedDialogResponder.respond(RESPONSE_URL);
+		transactionDialogResponder.respond(RESPONSE_URL);
 
 		verify(restTemplateMock).exchange(requestEntityMock, Void.class);
 	}

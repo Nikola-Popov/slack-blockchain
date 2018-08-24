@@ -15,7 +15,7 @@ import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
 
 @Component
-public class TransactionSubmittedDialogResponder {
+public class TransactionDialogResponder {
 	private static final String SUCESSFUL_TRANSACTION_RESPONSE_MESSAGE = "All good to go! You have sucessfuly created a transaction.";
 
 	@Autowired

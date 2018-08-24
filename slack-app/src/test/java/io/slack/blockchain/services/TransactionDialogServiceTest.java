@@ -30,7 +30,9 @@ import com.github.seratch.jslack.api.model.User;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
+import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
 import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogProvider;
+import io.slack.blockchain.interactive.components.dialogs.client.TransactionDialogResponder;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.processors.SubmittedTransactionProcessor;
 import io.slack.blockchain.utils.converters.UserConverter;
@@ -38,6 +40,7 @@ import io.slack.blockchain.utils.converters.UserConverter;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TransactionDialogServiceTest {
+	private static final String RESPONSE_URL = "responseUrl";
 	private static final String SLACK_OAUTH_TOKEN_FIELD_NAME = "slackOauthToken";
 	private static final String SLACK_OUATH_TOKEN = "slack-oauth-token";
 	private static final String TRIGGER_ID = "triggerId";
@@ -77,6 +80,12 @@ public class TransactionDialogServiceTest {
 	@Mock
 	private DialogOpenResponse dialogOpenResponseMock;
 
+	@Mock
+	private TransactionDialogResponder transactionDialogResponderMock;
+
+	@Mock
+	private TransactionDialogSubmission transactionDialogSubmissionMock;
+
 	@Before
 	public void setup() throws Exception {
 		when(slackMock.methods()).thenReturn(methodsClientMock);
@@ -85,6 +94,9 @@ public class TransactionDialogServiceTest {
 
 		when(userConverterMock.convert(users)).thenReturn(usersDialogOptions);
 		when(slackTransactionDialogFactoryMock.createTransactionsDialog(usersDialogOptions)).thenReturn(DIALOG);
+
+		when(submittedTransactionProcessorMock.process(PAYLOAD)).thenReturn(transactionDialogSubmissionMock);
+		when(transactionDialogSubmissionMock.getResponseUrl()).thenReturn(RESPONSE_URL);
 	}
 
 	@Test
@@ -122,12 +134,12 @@ public class TransactionDialogServiceTest {
 	public void testProcessTransaction() throws Exception {
 		transactionDialogService.processTransaction(PAYLOAD);
 
-		verify(submittedTransactionProcessorMock).processSubmissionDialogData(PAYLOAD);
+		verify(submittedTransactionProcessorMock).process(PAYLOAD);
 	}
 
 	@Test(expected = URISyntaxException.class)
 	public void testProcessTransactionProcessorThrowsUriSyntaxException() throws Exception {
-		doThrow(URISyntaxException.class).when(submittedTransactionProcessorMock).processSubmissionDialogData(PAYLOAD);
+		doThrow(URISyntaxException.class).when(submittedTransactionProcessorMock).process(PAYLOAD);
 
 		transactionDialogService.processTransaction(PAYLOAD);
 	}

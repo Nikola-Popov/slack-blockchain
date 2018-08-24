@@ -1,4 +1,4 @@
-package io.transaction.broker.coinbase.security.oauth.domain;
+package io.slack.blockchain.coinbase.security.oauth.domain;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

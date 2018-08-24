@@ -1,7 +1,7 @@
-package io.transaction.broker.coinbase.security.oauth.controllers;
+package io.slack.blockchain.coinbase.security.oauth.controllers;
 
-import static io.transaction.broker.coinbase.security.oauth.constants.QueryParamsConstants.CODE;
-import static io.transaction.broker.coinbase.security.oauth.constants.QueryParamsConstants.STATE;
+import static io.slack.blockchain.coinbase.security.oauth.constants.QueryParamsConstants.CODE;
+import static io.slack.blockchain.coinbase.security.oauth.constants.QueryParamsConstants.STATE;
 
 import java.net.URISyntaxException;
 
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import io.slack.blockchain.coinbase.security.oauth.domain.OAuthResponse;
+import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
+import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseStateManager;
 import io.slack.blockchain.commons.http.RequestEntityFactory;
-import io.transaction.broker.coinbase.security.oauth.domain.OAuthResponse;
-import io.transaction.broker.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
-import io.transaction.broker.coinbase.security.oauth.utils.CoinbaseStateManager;
 
 @RestController(value = "/")
 public class CoinbaseAuthorizationRestController {

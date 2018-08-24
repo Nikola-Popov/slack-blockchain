@@ -1,4 +1,4 @@
-package io.transaction.broker.coinbase.security.oauth.constants;
+package io.slack.blockchain.coinbase.security.oauth.constants;
 
 public final class QueryParamsConstants {
 	public static final String META_SEND_LIMIT_PERIOD = "meta[send_limit_period]";

@@ -1,6 +1,7 @@
 package io.slack.blockchain.processors;
 
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
@@ -10,12 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
-import io.slack.blockchain.interactive.components.dialogs.client.TransactionSubmittedDialogResponder;
 import io.slack.blockchain.interactive.components.dialogs.parsers.TransactionSubmissionDialogParser;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SubmittedTransactionProcessorTest {
-	private static final String RESPONSE_URL = "response-url";
 	private static final String PAYLOAD = "payload";
 
 	@InjectMocks
@@ -25,20 +24,13 @@ public class SubmittedTransactionProcessorTest {
 	private TransactionSubmissionDialogParser transactionSubmissionDialogParserMock;
 
 	@Mock
-	private TransactionSubmittedDialogResponder transactionSubmittedDialogResponderMock;
-
-	@Mock
 	private TransactionDialogSubmission transactionDialogSubmissionMock;
 
 	@Test
 	public void testProcessSubmissionDialogData() throws Exception {
 		when(transactionSubmissionDialogParserMock.parseSubmittedData(PAYLOAD))
 				.thenReturn(transactionDialogSubmissionMock);
-		when(transactionDialogSubmissionMock.getResponseUrl()).thenReturn(RESPONSE_URL);
 
-		submittedTransactionProcessor.processSubmissionDialogData(PAYLOAD);
-
-		verify(transactionDialogSubmissionMock).getResponseUrl();
-		verify(transactionSubmittedDialogResponderMock).respond(RESPONSE_URL);
+		assertThat(submittedTransactionProcessor.process(PAYLOAD), equalTo(transactionDialogSubmissionMock));
 	}
 }

@@ -17,6 +17,7 @@ import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
 import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogProvider;
+import io.slack.blockchain.interactive.components.dialogs.client.TransactionDialogResponder;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.processors.SubmittedTransactionProcessor;
 import io.slack.blockchain.utils.converters.UserConverter;
@@ -38,6 +39,9 @@ public class TransactionDialogService {
 	@Autowired
 	private SubmittedTransactionProcessor submittedTransactionProcessor;
 
+	@Autowired
+	private TransactionDialogResponder transactionDialogResponder;
+
 	public void openTransactionDialog(final String triggerId) {
 		try {
 			final List<User> users = slack.methods()
@@ -54,6 +58,6 @@ public class TransactionDialogService {
 	}
 
 	public void processTransaction(final String payload) throws URISyntaxException {
-		submittedTransactionProcessor.processSubmissionDialogData(payload);
+		transactionDialogResponder.respond(submittedTransactionProcessor.process(payload).getResponseUrl());
 	}
 }
