@@ -1,5 +1,6 @@
 package io.slack.blockchain.commons.http;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8;
 import static org.springframework.http.RequestEntity.method;
@@ -20,6 +21,10 @@ public class RequestEntityFactory {
 
 	public <T> RequestEntity<T> createPostRequestEntity(final String url, final T body) throws URISyntaxException {
 		return createDefaultBodyBuilder(POST, url).body(body);
+	}
+
+	public RequestEntity<Void> createGetRequestEntity(final String url) throws URISyntaxException {
+		return createDefaultBodyBuilder(GET, url).build();
 	}
 
 	private <T> BodyBuilder createDefaultBodyBuilder(final HttpMethod httpMethod, final String url)

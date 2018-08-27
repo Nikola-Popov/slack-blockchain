@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.slack.blockchain.coinbase.security.oauth.client.CoinbaseAuthorizationClient;
+import io.slack.blockchain.coinbase.security.oauth.client.CoinbaseAuthorizationInitiator;
 import io.slack.blockchain.domain.SlackUser;
 import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
@@ -27,7 +27,7 @@ public class SlackRestController {
 	private UserService userService;
 
 	@Autowired
-	private CoinbaseAuthorizationClient coinbaseAuthorizationClient;
+	private CoinbaseAuthorizationInitiator coinbaseAuthorizationInitiator;
 
 	@PostMapping(path = "/configure/email", produces = APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<AttachmentResponse> configureAddress(@RequestParam("trigger_id") final String triggerId,
@@ -44,7 +44,7 @@ public class SlackRestController {
 
 	@PostMapping(path = "/transaction/submit", produces = APPLICATION_JSON_UTF8_VALUE)
 	public void submitTransaction(@RequestParam("payload") final String payload) throws URISyntaxException {
-		coinbaseAuthorizationClient.initiateAuthorization();
+		coinbaseAuthorizationInitiator.initiateAuthorization();
 		transactionDialogService.processTransaction(payload);
 	}
 }

@@ -14,7 +14,7 @@ import static io.slack.blockchain.coinbase.security.oauth.constants.QueryParamsC
 import static io.slack.blockchain.coinbase.security.oauth.constants.QueryParamsConstants.SCOPE;
 import static io.slack.blockchain.coinbase.security.oauth.constants.QueryParamsConstants.STATE;
 import static io.slack.blockchain.coinbase.security.oauth.constants.QueryParamsConstants.WALLET_TRANSACTIONS_SEND;
-import static io.slack.blockchain.commons.http.HttpConstants.HTTPS;
+import static io.slack.blockchain.commons.http.HttpConstants.HTTPS_SCHEME;
 import static io.slack.blockchain.commons.miscellaneous.trading.Currency.USD;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class CoinbaseAuthorizationEndpointBuilderUtil {
 	private UriComponentsBuilder uriComponentsBuilder;
 
 	public String buildAuthorizationEndpoint(final String state) {
-		return uriComponentsBuilder.scheme(HTTPS).host(coinbaseConfigurationProperties.getAuthorizationHost())
+		return uriComponentsBuilder.scheme(HTTPS_SCHEME).host(coinbaseConfigurationProperties.getAuthorizationHost())
 				.queryParam(RESPONSE_TYPE, CODE).queryParam(CLIENT_ID, coinbaseConfigurationProperties.getClientId())
 				.queryParam(SCOPE, WALLET_TRANSACTIONS_SEND)
 				.queryParam(META_SEND_LIMIT_AMOUNT, coinbaseConfigurationProperties.getDefaultSendLimmit())
@@ -41,7 +41,7 @@ public class CoinbaseAuthorizationEndpointBuilderUtil {
 	}
 
 	public String buildAccessTokenEndpoint(final String code, final String redirectUri) {
-		return uriComponentsBuilder.scheme(HTTPS).host(coinbaseConfigurationProperties.getTokenHost())
+		return uriComponentsBuilder.scheme(HTTPS_SCHEME).host(coinbaseConfigurationProperties.getTokenHost())
 				.queryParam(GRANT_TYPE, AUTHORIZATION_CODE).queryParam(CODE, code)
 				.queryParam(CLIENT_ID, coinbaseConfigurationProperties.getClientId())
 				.queryParam(CLIENT_SECRET, coinbaseConfigurationProperties.getClientSecret())

@@ -1,5 +1,6 @@
 package io.slack.blockchain.coinbase.security.oauth.controllers;
 
+import static io.slack.blockchain.coinbase.security.oauth.constants.CoinbaseAuthorizationConstants.GRANTED_AUTHORIZATION_URI;
 import static io.slack.blockchain.coinbase.security.oauth.constants.QueryParamsConstants.CODE;
 import static io.slack.blockchain.coinbase.security.oauth.constants.QueryParamsConstants.STATE;
 
@@ -15,14 +16,10 @@ import org.springframework.web.client.RestTemplate;
 
 import io.slack.blockchain.coinbase.security.oauth.domain.OAuthResponse;
 import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
-import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseStateManager;
 import io.slack.blockchain.commons.http.RequestEntityFactory;
 
-@RestController(value = "/")
+@RestController
 public class CoinbaseAuthorizationRestController {
-	@Autowired
-	private CoinbaseStateManager coinbaseStateManager;
-
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -32,10 +29,10 @@ public class CoinbaseAuthorizationRestController {
 	@Autowired
 	private CoinbaseAuthorizationEndpointBuilderUtil coinbaseAuthorizationEndpointBuilderUtil;
 
-	@GetMapping
+	@GetMapping(path = GRANTED_AUTHORIZATION_URI)
 	public void acquireAccessToken(@RequestParam(CODE) final String code, @RequestParam(STATE) final String state)
 			throws RestClientException, URISyntaxException {
-		coinbaseStateManager.verify(state);
+		// TODO: verify state
 		final String coinbaseAcessTokenEndpoint = coinbaseAuthorizationEndpointBuilderUtil
 				.buildAccessTokenEndpoint(code, "redirectUrl");
 

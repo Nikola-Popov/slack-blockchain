@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import io.slack.blockchain.coinbase.security.oauth.exceptions.InvalidResponseAuthorizationStateException;
 
 @Component
-public class CoinbaseStateManager {
+public class CoinbaseStateManagerUtil {
 	private String state = "";
 
 	public void verify(final String responseState) {
