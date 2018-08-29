@@ -13,9 +13,9 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import io.slack.blockchain.commons.factories.AttachmentResponseFactory;
-import io.slack.blockchain.domain.SlackUser;
 import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
+import io.slack.blockchain.domain.users.SlackUser;
 import io.slack.blockchain.repositories.SlackUsersRepository;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -34,7 +34,8 @@ public class UserServiceTest {
 
 	@Test
 	public void testProcess() {
-		when(attachmentResponseFactoryMock.createAttachmentResponse(any(Attachment.class))).thenReturn(ATTACHMENT_RESPONSE);
+		when(attachmentResponseFactoryMock.createAttachmentResponse(any(Attachment.class)))
+				.thenReturn(ATTACHMENT_RESPONSE);
 
 		assertThat(userService.process(any(SlackUser.class)), equalTo(ATTACHMENT_RESPONSE));
 	}

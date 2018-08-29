@@ -9,15 +9,17 @@ import org.springframework.stereotype.Component;
 import com.google.gson.JsonObject;
 
 import io.slack.blockchain.commons.services.GsonJsonService;
+import io.slack.blockchain.domain.dialog.DialogSubmission;
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
 
 @Component
-public class TransactionSubmissionDialogParser {
+public class TransactionSubmissionDialogParser implements DialogSumissionParser {
 
 	@Autowired
 	private GsonJsonService gsonJsonService;
 
-	public TransactionDialogSubmission parseSubmittedData(final String payload) {
+	@Override
+	public DialogSubmission parse(String payload) {
 		final JsonObject payloadAsJson = gsonJsonService.parse(payload).getAsJsonObject();
 		final TransactionDialogSubmission transactionDialogSubmission = gsonJsonService
 				.fromJson(payloadAsJson.get(SUBMISSION).getAsJsonObject(), TransactionDialogSubmission.class);

@@ -28,7 +28,7 @@ public class SubmittedTransactionProcessorTest {
 
 	@Test
 	public void testProcessSubmissionDialogData() throws Exception {
-		when(transactionSubmissionDialogParserMock.parseSubmittedData(PAYLOAD))
+		when(transactionSubmissionDialogParserMock.parse(PAYLOAD))
 				.thenReturn(transactionDialogSubmissionMock);
 
 		assertThat(submittedTransactionProcessor.process(PAYLOAD), equalTo(transactionDialogSubmissionMock));

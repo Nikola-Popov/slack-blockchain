@@ -31,7 +31,7 @@ import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
-import io.slack.blockchain.interactive.components.dialogs.SlackTransactionsDialogProvider;
+import io.slack.blockchain.interactive.components.dialogs.TransactionsDialogFactory;
 import io.slack.blockchain.interactive.components.dialogs.client.TransactionDialogResponder;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.processors.SubmittedTransactionProcessor;
@@ -57,7 +57,7 @@ public class TransactionDialogServiceTest {
 	private UserConverter userConverterMock;
 
 	@Mock
-	private SlackTransactionsDialogProvider slackTransactionDialogFactoryMock;
+	private TransactionsDialogFactory slackTransactionDialogFactoryMock;
 
 	@Mock
 	private SubmittedTransactionProcessor submittedTransactionProcessorMock;
@@ -103,7 +103,7 @@ public class TransactionDialogServiceTest {
 	public void testOpenTransactionDialogHappyPath() throws Exception {
 		setField(transactionDialogService, SLACK_OAUTH_TOKEN_FIELD_NAME, SLACK_OUATH_TOKEN);
 
-		transactionDialogService.openTransactionDialog(TRIGGER_ID);
+		transactionDialogService.openDialog(TRIGGER_ID);
 
 		verify(methodsClientMock).dialogOpen(
 				DialogOpenRequest.builder().token(SLACK_OUATH_TOKEN).triggerId(TRIGGER_ID).dialog(DIALOG).build());
@@ -113,21 +113,21 @@ public class TransactionDialogServiceTest {
 	public void testOpenTransactionDialogUsersListThrowsIOException() throws Exception {
 		when(methodsClientMock.usersList(any(UsersListRequest.class))).thenThrow(IOException.class);
 
-		transactionDialogService.openTransactionDialog(TRIGGER_ID);
+		transactionDialogService.openDialog(TRIGGER_ID);
 	}
 
 	@Test(expected = DialogOpenException.class)
 	public void testOpenTransactionDialogUsersListThrowsSlackApiException() throws Exception {
 		when(methodsClientMock.usersList(any(UsersListRequest.class))).thenThrow(SlackApiException.class);
 
-		transactionDialogService.openTransactionDialog(TRIGGER_ID);
+		transactionDialogService.openDialog(TRIGGER_ID);
 	}
 
 	@Test(expected = DialogOpenException.class)
 	public void testOpenTransactionDialogMethodsOpenDialogThrowsSlackApiException() throws Exception {
 		when(methodsClientMock.dialogOpen(any(DialogOpenRequest.class))).thenThrow(SlackApiException.class);
 
-		transactionDialogService.openTransactionDialog(TRIGGER_ID);
+		transactionDialogService.openDialog(TRIGGER_ID);
 	}
 
 	@Test

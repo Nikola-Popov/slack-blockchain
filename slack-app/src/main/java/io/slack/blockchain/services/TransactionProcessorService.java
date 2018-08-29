@@ -1,24 +1,29 @@
-package io.slack.blockchain.processors;
+package io.slack.blockchain.services;
 
 import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
+import io.slack.blockchain.interactive.components.dialogs.client.TransactionDialogResponder;
 import io.slack.blockchain.interactive.components.dialogs.parsers.TransactionSubmissionDialogParser;
 import lombok.extern.slf4j.Slf4j;
 
-@Component
+@Service
 @Slf4j
-public class SubmittedTransactionProcessor {
+public class TransactionProcessorService {
 	@Autowired
 	private TransactionSubmissionDialogParser transactionSubmissionDialogParser;
 
-	public TransactionDialogSubmission process(final String payload) throws URISyntaxException {
+	@Autowired
+	private TransactionDialogResponder transactionDialogResponder;
+
+	public void process(final String payload) throws URISyntaxException {
 		final TransactionDialogSubmission transactionDialogSubmission = transactionSubmissionDialogParser
-				.parseSubmittedData(payload);
+				.parse(payload);
 		log.info(transactionDialogSubmission.toString());
-		return transactionDialogSubmission;
+
+		transactionDialogResponder.respond(transactionDialogSubmission.getResponseUrl());
 	}
 }

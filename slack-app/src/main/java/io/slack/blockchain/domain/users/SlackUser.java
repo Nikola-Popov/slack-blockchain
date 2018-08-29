@@ -1,4 +1,4 @@
-package io.slack.blockchain.domain;
+package io.slack.blockchain.domain.users;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -28,4 +28,6 @@ public class SlackUser {
 
 	@Email
 	private String email;
+
+	private boolean isAuthorized;
 }

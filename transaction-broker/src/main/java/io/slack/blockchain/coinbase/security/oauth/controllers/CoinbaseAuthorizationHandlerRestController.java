@@ -19,7 +19,7 @@ import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseAuthorizationEn
 import io.slack.blockchain.commons.http.RequestEntityFactory;
 
 @RestController
-public class CoinbaseAuthorizationRestController {
+public class CoinbaseAuthorizationHandlerRestController {
 	@Autowired
 	private RestTemplate restTemplate;
 

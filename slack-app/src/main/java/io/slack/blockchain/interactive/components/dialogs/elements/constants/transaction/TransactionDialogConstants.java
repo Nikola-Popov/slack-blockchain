@@ -1,4 +1,4 @@
-package io.slack.blockchain.interactive.components.dialogs.elements.constants;
+package io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction;
 
 public final class TransactionDialogConstants {
 	public static final String CREATE_BUTTON_LABEL = "Create";

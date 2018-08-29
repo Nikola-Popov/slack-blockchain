@@ -1,13 +1,15 @@
 package io.slack.blockchain.interactive.components.dialogs;
 
-import static io.slack.blockchain.interactive.components.dialogs.elements.constants.TransactionDialogConstants.CREATE_BUTTON_LABEL;
-import static io.slack.blockchain.interactive.components.dialogs.elements.constants.TransactionDialogConstants.TRANSACTION_DIALOG_CALLBACK_ID;
-import static io.slack.blockchain.interactive.components.dialogs.elements.constants.TransactionDialogConstants.TRANSACTION_DIALOG_TITlE;
+import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.AMOUNT_DIALOG_TEXT_ELEMENT;
+import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.CREATE_BUTTON_LABEL;
+import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.TRANSACTION_DIALOG_CALLBACK_ID;
+import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.TRANSACTION_DIALOG_TITlE;
 import static java.util.Arrays.asList;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.github.seratch.jslack.api.model.dialog.Dialog;
@@ -18,11 +20,12 @@ import com.github.seratch.jslack.api.model.dialog.DialogTextElement;
 import io.slack.blockchain.interactive.components.dialogs.elements.UsersSelectElementFactory;
 
 @Component
-public class SlackTransactionsDialogProvider {
+public class TransactionsDialogFactory {
 	@Autowired
 	private DialogSelectElement currencySelectElement;
 
 	@Autowired
+	@Qualifier(AMOUNT_DIALOG_TEXT_ELEMENT)
 	private DialogTextElement amountTextElement;
 
 	@Autowired

@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class TransactionDialogSubmission {
+public class TransactionDialogSubmission extends DialogSubmission {
 	private int amount;
 	private Currency currency;
 	private String user;

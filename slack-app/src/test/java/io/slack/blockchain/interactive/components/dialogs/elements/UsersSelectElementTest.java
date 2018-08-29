@@ -1,7 +1,7 @@
 package io.slack.blockchain.interactive.components.dialogs.elements;
 
-import static io.slack.blockchain.interactive.components.dialogs.elements.constants.TransactionSelectElementConstants.USER_ELEMENT_LABEL;
-import static io.slack.blockchain.interactive.components.dialogs.elements.constants.TransactionSelectElementConstants.USER_ELEMENT_PLACEHOLDER;
+import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionSelectElementConstants.USER_ELEMENT_LABEL;
+import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionSelectElementConstants.USER_ELEMENT_PLACEHOLDER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
 import static org.hamcrest.Matchers.equalTo;
