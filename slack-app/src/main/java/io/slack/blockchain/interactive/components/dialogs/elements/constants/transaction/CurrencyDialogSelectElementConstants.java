@@ -1,6 +1,6 @@
 package io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction;
 
-public final class TransactionSelectElementConstants {
+public final class CurrencyDialogSelectElementConstants {
 	public static final String USER_ELEMENT_PLACEHOLDER = "Select the user you wish to send the currency to";
 	public static final String USER_ELEMENT_LABEL = "User";
 

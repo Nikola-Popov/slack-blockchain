@@ -1,5 +1,8 @@
 package io.slack.blockchain.domain.dialog;
 
-public class ConfigurationDialogSubmission extends DialogSubmission {
+import lombok.Data;
 
+@Data
+public class ConfigurationDialogSubmission {
+	private String email;
 }

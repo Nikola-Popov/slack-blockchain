@@ -32,9 +32,9 @@ import com.github.seratch.jslack.api.model.dialog.DialogOption;
 
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
 import io.slack.blockchain.interactive.components.dialogs.TransactionsDialogFactory;
-import io.slack.blockchain.interactive.components.dialogs.client.TransactionDialogResponder;
+import io.slack.blockchain.interactive.components.dialogs.client.DialogResponder;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
-import io.slack.blockchain.processors.SubmittedTransactionProcessor;
+import io.slack.blockchain.processing.SubmittedTransactionProcessor;
 import io.slack.blockchain.utils.converters.UserConverter;
 
 @RunWith(SpringRunner.class)
@@ -81,7 +81,7 @@ public class TransactionDialogServiceTest {
 	private DialogOpenResponse dialogOpenResponseMock;
 
 	@Mock
-	private TransactionDialogResponder transactionDialogResponderMock;
+	private DialogResponder transactionDialogResponderMock;
 
 	@Mock
 	private TransactionDialogSubmission transactionDialogSubmissionMock;

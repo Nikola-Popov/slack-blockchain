@@ -17,25 +17,36 @@ import io.slack.blockchain.commons.factories.AttachmentResponseFactory;
 import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
+import io.slack.blockchain.services.dialogs.exceptions.DialogServiceInstantionException;
 
 @ControllerAdvice
 @ResponseBody
 public class SlackTransactionDialogExceptionHandler {
 	private static final String DIALOG_OPEN_ERROR_MESSAGE = "An error occured while trying to open the transaction dialog window";
 	private static final String INVALID_AMOUNT_RESPONSE_MESSAGE = "Invalid amount type specified. Please, note that only numbers are allowed!";
+	private static final String INTERNAL_SERVER_ERROR_GENERIC_RESPONSE_MESSAGE = "Something went wrong! Please, retry again.";
 
 	@Autowired
 	private AttachmentResponseFactory attachmentResponseFactory;
 
 	@ExceptionHandler(DialogOpenException.class)
 	public ResponseEntity<AttachmentResponse> handleDialogOpenException() {
-		return status(INTERNAL_SERVER_ERROR).body(attachmentResponseFactory
-				.createAttachmentResponse(Attachment.builder().text(DIALOG_OPEN_ERROR_MESSAGE).status(DANGER).build()));
+		return createInternalServerErrorResponse(DIALOG_OPEN_ERROR_MESSAGE);
 	}
 
 	@ExceptionHandler(JsonSyntaxException.class)
 	public ResponseEntity<AttachmentResponse> handleSubmittedTransactionInvalidDataException() {
 		return badRequest().body(attachmentResponseFactory.createAttachmentResponse(
 				Attachment.builder().text(INVALID_AMOUNT_RESPONSE_MESSAGE).status(DANGER).build()));
+	}
+
+	@ExceptionHandler(DialogServiceInstantionException.class)
+	public ResponseEntity<AttachmentResponse> handleDialogServiceInstantionException() {
+		return createInternalServerErrorResponse(INTERNAL_SERVER_ERROR_GENERIC_RESPONSE_MESSAGE);
+	}
+
+	private ResponseEntity<AttachmentResponse> createInternalServerErrorResponse(final String responseMessage) {
+		return status(INTERNAL_SERVER_ERROR).body(attachmentResponseFactory
+				.createAttachmentResponse(Attachment.builder().text(responseMessage).status(DANGER).build()));
 	}
 }

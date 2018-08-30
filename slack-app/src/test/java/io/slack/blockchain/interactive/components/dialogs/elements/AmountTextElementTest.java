@@ -1,9 +1,9 @@
 package io.slack.blockchain.interactive.components.dialogs.elements;
 
 import static com.github.seratch.jslack.api.model.dialog.DialogSubType.NUMBER;
-import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogTextElementConstants.AMOUNT_ELEMENT_PLACEHOLDER;
-import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogTextElementConstants.AMOUNT_LABEL;
-import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogTextElementConstants.TEXT_ELEMENT_MAX_ELEMENT_LENGTH;
+import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.AmountDialogTextElementConstants.AMOUNT_ELEMENT_PLACEHOLDER;
+import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.AmountDialogTextElementConstants.AMOUNT_LABEL;
+import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.AmountDialogTextElementConstants.TEXT_ELEMENT_MAX_ELEMENT_LENGTH;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 

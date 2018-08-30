@@ -2,6 +2,8 @@ package io.slack.blockchain.services.dialogs;
 
 import java.io.IOException;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,10 @@ import com.github.seratch.jslack.api.model.dialog.Dialog;
 import io.slack.blockchain.commons.configurations.slack.SlackConfigurationProperties;
 import io.slack.blockchain.interactive.components.dialogs.EmailConfigurationDialogFactory;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
+import lombok.Setter;
 
 @Service
+@Setter
 public class EmailConfigurationDialogService implements DialogService {
 	@Autowired
 	private Slack slack;
@@ -26,6 +30,7 @@ public class EmailConfigurationDialogService implements DialogService {
 	private SlackConfigurationProperties slackConfigurationProperties;
 
 	@Override
+	@PostConstruct
 	public void openDialog(String triggerId) {
 		try {
 			final Dialog dialog = emailConfigurationDialogFactory.createEmailConfigurationDialog();

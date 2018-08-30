@@ -1,7 +1,5 @@
 package io.slack.blockchain.interactive.components.dialogs.client;
 
-import static io.slack.blockchain.domain.attachments.Status.GOOD;
-
 import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +11,10 @@ import io.slack.blockchain.commons.factories.AttachmentResponseFactory;
 import io.slack.blockchain.commons.http.RequestEntityFactory;
 import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
+import io.slack.blockchain.domain.attachments.Status;
 
 @Component
-public class TransactionDialogResponder {
-	private static final String SUCESSFUL_TRANSACTION_RESPONSE_MESSAGE = "All good to go! You have sucessfuly created a transaction.";
-
+public class DialogResponder {
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -27,9 +24,10 @@ public class TransactionDialogResponder {
 	@Autowired
 	private RequestEntityFactory requestEntityFactory;
 
-	public void respond(final String responseUrl) throws URISyntaxException {
-		final AttachmentResponse attachmentResponse = attachmentResponseFactory.createAttachmentResponse(
-				Attachment.builder().text(SUCESSFUL_TRANSACTION_RESPONSE_MESSAGE).status(GOOD).build());
+	public void respond(final String responseUrl, final Status status, final String responseMessage)
+			throws URISyntaxException {
+		final AttachmentResponse attachmentResponse = attachmentResponseFactory
+				.createAttachmentResponse(Attachment.builder().text(responseMessage).status(status).build());
 		final RequestEntity<AttachmentResponse> requestEntity = requestEntityFactory
 				.createPostRequestEntity(responseUrl, attachmentResponse);
 		restTemplate.exchange(requestEntity, Void.class);
