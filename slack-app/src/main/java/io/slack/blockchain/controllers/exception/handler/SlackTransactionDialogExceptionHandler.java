@@ -17,6 +17,7 @@ import io.slack.blockchain.commons.factories.AttachmentResponseFactory;
 import io.slack.blockchain.domain.attachments.Attachment;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
+import io.slack.blockchain.services.dialogs.exceptions.DialogResponderException;
 import io.slack.blockchain.services.dialogs.exceptions.DialogServiceInstantionException;
 
 @ControllerAdvice
@@ -24,7 +25,7 @@ import io.slack.blockchain.services.dialogs.exceptions.DialogServiceInstantionEx
 public class SlackTransactionDialogExceptionHandler {
 	private static final String DIALOG_OPEN_ERROR_MESSAGE = "An error occured while trying to open the transaction dialog window";
 	private static final String INVALID_AMOUNT_RESPONSE_MESSAGE = "Invalid amount type specified. Please, note that only numbers are allowed!";
-	private static final String INTERNAL_SERVER_ERROR_GENERIC_RESPONSE_MESSAGE = "Something went wrong! Please, retry again.";
+	private static final String INTERNAL_SERVER_ERROR_GENERIC_RESPONSE_MESSAGE = "Something went wrong! Please, try again!";
 
 	@Autowired
 	private AttachmentResponseFactory attachmentResponseFactory;
@@ -42,6 +43,11 @@ public class SlackTransactionDialogExceptionHandler {
 
 	@ExceptionHandler(DialogServiceInstantionException.class)
 	public ResponseEntity<AttachmentResponse> handleDialogServiceInstantionException() {
+		return createInternalServerErrorResponse(INTERNAL_SERVER_ERROR_GENERIC_RESPONSE_MESSAGE);
+	}
+
+	@ExceptionHandler(DialogResponderException.class)
+	public ResponseEntity<AttachmentResponse> handleDialogResponderxception() {
 		return createInternalServerErrorResponse(INTERNAL_SERVER_ERROR_GENERIC_RESPONSE_MESSAGE);
 	}
 
