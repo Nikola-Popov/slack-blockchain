@@ -1,4 +1,4 @@
-package io.slack.blockchain.processing;
+package io.slack.blockchain.processing.dialog;
 
 import io.slack.blockchain.domain.processing.ProcessingResult;
 

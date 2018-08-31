@@ -1,7 +1,8 @@
-package io.slack.blockchain.processing;
+package io.slack.blockchain.processing.dialog;
 
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
 import io.slack.blockchain.domain.processing.ProcessingResult;
+import io.slack.blockchain.processing.dialog.DialogProcessor;
 
 public class TransactionDialogProcessor implements DialogProcessor {
 	private TransactionDialogSubmission transactionDialogSubmission;

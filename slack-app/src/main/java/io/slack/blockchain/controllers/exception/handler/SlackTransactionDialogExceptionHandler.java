@@ -19,6 +19,7 @@ import io.slack.blockchain.domain.attachments.AttachmentResponse;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.services.dialogs.exceptions.DialogResponderException;
 import io.slack.blockchain.services.dialogs.exceptions.DialogServiceInstantionException;
+import io.slack.blockchain.services.dialogs.exceptions.MissingDialogSubmissionException;
 
 @ControllerAdvice
 @ResponseBody
@@ -48,6 +49,11 @@ public class SlackTransactionDialogExceptionHandler {
 
 	@ExceptionHandler(DialogResponderException.class)
 	public ResponseEntity<AttachmentResponse> handleDialogResponderxception() {
+		return createInternalServerErrorResponse(INTERNAL_SERVER_ERROR_GENERIC_RESPONSE_MESSAGE);
+	}
+
+	@ExceptionHandler(MissingDialogSubmissionException.class)
+	public ResponseEntity<AttachmentResponse> handleMissingDialogSubmissionException() {
 		return createInternalServerErrorResponse(INTERNAL_SERVER_ERROR_GENERIC_RESPONSE_MESSAGE);
 	}
 

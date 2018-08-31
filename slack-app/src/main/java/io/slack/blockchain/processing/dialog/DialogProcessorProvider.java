@@ -1,4 +1,4 @@
-package io.slack.blockchain.processing;
+package io.slack.blockchain.processing.dialog;
 
 import org.springframework.stereotype.Component;
 
