@@ -7,5 +7,4 @@ import io.slack.blockchain.domain.users.SlackUser;
 
 @Repository
 public interface SlackUsersRepository extends JpaRepository<SlackUser, Long> {
-
 }

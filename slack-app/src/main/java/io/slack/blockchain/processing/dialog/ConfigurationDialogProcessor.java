@@ -12,7 +12,6 @@ public class ConfigurationDialogProcessor implements DialogProcessor {
 
 	@Override
 	public ProcessingResult process() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.slack.blockchain.domain.dialog.ConfigurationDialogSubmission;
+import io.slack.blockchain.domain.dialog.DialogIdentityPayload;
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
 import io.slack.blockchain.interactive.components.dialogs.parsers.DialogPayloadParser;
-import io.slack.blockchain.services.ProcessorService;
+import io.slack.blockchain.processing.dialog.providers.DialogContentProvider;
 import io.slack.blockchain.services.dialogs.exceptions.MissingDialogSubmissionException;
 
 @Service
@@ -20,12 +21,18 @@ public class ProcessorInitiatorService {
 	@Autowired
 	private ProcessorService processorService;
 
-	public <T> void initiateProcessing(final String payload) {
-		final String callbackId = dialogPayloadParser.parseCallbackId(payload);
+	@Autowired
+	private DialogContentProvider dialogContentProvider;
+
+	public void initiateProcessing(final String payload) {
+		final DialogIdentityPayload dialogIdentityPayload = dialogPayloadParser.parseIdentity(payload);
+		final String callbackId = dialogIdentityPayload.getCallbackId();
 		if (callbackId.equals(TRANSACTION_DIALOG_CALLBACK_ID)) {
-			processorService.process(payload, TransactionDialogSubmission.class);
+			processorService.process(
+					dialogContentProvider.provide(dialogIdentityPayload, payload, TransactionDialogSubmission.class));
 		} else if (callbackId.equals(CONFIGURATION_DIALOG_CALLBACK_ID)) {
-			processorService.process(payload, ConfigurationDialogSubmission.class);
+			processorService.process(
+					dialogContentProvider.provide(dialogIdentityPayload, payload, ConfigurationDialogSubmission.class));
 		} else {
 			throw new MissingDialogSubmissionException("Invalid callback_id received!");
 		}

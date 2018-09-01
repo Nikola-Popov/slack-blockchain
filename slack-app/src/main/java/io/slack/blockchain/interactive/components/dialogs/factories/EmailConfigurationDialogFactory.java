@@ -1,4 +1,4 @@
-package io.slack.blockchain.interactive.components.dialogs;
+package io.slack.blockchain.interactive.components.dialogs.factories;
 
 import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.EMAIL_DIALOG_TEXT_ELEMENT;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.configuration.ConfigurationDialogConstants.CONFIGURATION_DIALOG_CALLBACK_ID;

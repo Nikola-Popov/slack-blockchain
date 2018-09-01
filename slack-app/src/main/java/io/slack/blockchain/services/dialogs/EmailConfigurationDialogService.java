@@ -13,8 +13,8 @@ import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 
 import io.slack.blockchain.commons.configurations.slack.SlackConfigurationProperties;
-import io.slack.blockchain.interactive.components.dialogs.EmailConfigurationDialogFactory;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
+import io.slack.blockchain.interactive.components.dialogs.factories.EmailConfigurationDialogFactory;
 import lombok.Setter;
 
 @Service

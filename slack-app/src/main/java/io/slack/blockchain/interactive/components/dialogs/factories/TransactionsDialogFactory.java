@@ -1,4 +1,4 @@
-package io.slack.blockchain.interactive.components.dialogs;
+package io.slack.blockchain.interactive.components.dialogs.factories;
 
 import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.AMOUNT_DIALOG_TEXT_ELEMENT;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.CREATE_BUTTON_LABEL;
