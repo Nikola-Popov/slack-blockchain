@@ -12,7 +12,7 @@ import io.slack.blockchain.services.dialogs.DialogServiceFactory;
 import io.slack.blockchain.services.dialogs.EmailConfigurationDialogService;
 import io.slack.blockchain.services.dialogs.TransactionDialogService;
 
-@RestController
+@RestController("/slack")
 public class SlackRestController {
 	@Autowired
 	private ProcessorInitiatorService processorInitiatorService;
@@ -21,17 +21,17 @@ public class SlackRestController {
 	private DialogServiceFactory dialogServiceFactory;
 
 	@PostMapping(path = "/configure", produces = APPLICATION_JSON_UTF8_VALUE)
-	public void configure(@RequestParam("trigger_id") final String triggerId) {
+	public void openConfigurationDialog(@RequestParam("trigger_id") final String triggerId) {
 		dialogServiceFactory.createDialogService(triggerId, EmailConfigurationDialogService.class);
 	}
 
 	@PostMapping(path = "/transaction", produces = APPLICATION_JSON_UTF8_VALUE)
-	public void makeTransaction(@RequestParam("trigger_id") final String triggerId) {
+	public void openTransactionDialog(@RequestParam("trigger_id") final String triggerId) {
 		dialogServiceFactory.createDialogService(triggerId, TransactionDialogService.class);
 	}
 
 	@PostMapping(path = "/dialog/submit", produces = APPLICATION_JSON_UTF8_VALUE)
-	public void submitConfigurations(@RequestParam("payload") final String payload) {
+	public void processDialog(@RequestParam("payload") final String payload) {
 		processorInitiatorService.initiateProcessing(payload);
 	}
 
