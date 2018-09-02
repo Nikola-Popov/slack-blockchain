@@ -1,13 +1,14 @@
 package io.slack.blockchain.processing.dialog;
 
 import io.slack.blockchain.domain.dialog.ConfigurationDialogSubmission;
+import io.slack.blockchain.domain.dialog.DialogContent;
 import io.slack.blockchain.domain.processing.ProcessingResult;
 
 public class ConfigurationDialogProcessor implements DialogProcessor {
-	private ConfigurationDialogSubmission configurationDialogSubmission;
+	private DialogContent<ConfigurationDialogSubmission> dialogContent;
 
-	public ConfigurationDialogProcessor(final ConfigurationDialogSubmission configurationDialogSubmission) {
-		this.configurationDialogSubmission = configurationDialogSubmission;
+	public ConfigurationDialogProcessor(DialogContent<ConfigurationDialogSubmission> dialogContent) {
+		this.dialogContent = dialogContent;
 	}
 
 	@Override

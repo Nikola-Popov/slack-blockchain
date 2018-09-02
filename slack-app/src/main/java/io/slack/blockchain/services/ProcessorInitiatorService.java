@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.slack.blockchain.domain.dialog.ConfigurationDialogSubmission;
-import io.slack.blockchain.domain.dialog.DialogIdentityPayload;
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
 import io.slack.blockchain.interactive.components.dialogs.parsers.DialogPayloadParser;
 import io.slack.blockchain.processing.dialog.providers.DialogContentProvider;
@@ -25,14 +24,11 @@ public class ProcessorInitiatorService {
 	private DialogContentProvider dialogContentProvider;
 
 	public void initiateProcessing(final String payload) {
-		final DialogIdentityPayload dialogIdentityPayload = dialogPayloadParser.parseIdentity(payload);
-		final String callbackId = dialogIdentityPayload.getCallbackId();
+		final String callbackId = dialogPayloadParser.parseIdentity(payload).getCallbackId();
 		if (callbackId.equals(TRANSACTION_DIALOG_CALLBACK_ID)) {
-			processorService.process(
-					dialogContentProvider.provide(dialogIdentityPayload, payload, TransactionDialogSubmission.class));
+			processorService.process(dialogContentProvider.provide(payload, TransactionDialogSubmission.class));
 		} else if (callbackId.equals(CONFIGURATION_DIALOG_CALLBACK_ID)) {
-			processorService.process(
-					dialogContentProvider.provide(dialogIdentityPayload, payload, ConfigurationDialogSubmission.class));
+			processorService.process(dialogContentProvider.provide(payload, ConfigurationDialogSubmission.class));
 		} else {
 			throw new MissingDialogSubmissionException("Invalid callback_id received!");
 		}

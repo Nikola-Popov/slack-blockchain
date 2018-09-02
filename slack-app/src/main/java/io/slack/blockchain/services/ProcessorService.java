@@ -21,7 +21,7 @@ public class ProcessorService {
 	private DialogProcessorProvider dialogProcessorProvider;
 
 	public <S> void process(final DialogContent<S> dialogContent) {
-		final DialogProcessor dialogProcessor = dialogProcessorProvider.provideBasedOn(dialogContent.getSubmission());
+		final DialogProcessor dialogProcessor = dialogProcessorProvider.provide(dialogContent);
 		final ProcessingResult processingResult = dialogProcessor.process();
 		try {
 			dialogResponder.respond(dialogContent.getDialogIdentityPayload().getResponseUrl(),
