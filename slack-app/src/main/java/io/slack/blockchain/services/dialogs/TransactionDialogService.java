@@ -3,8 +3,6 @@ package io.slack.blockchain.services.dialogs;
 import java.io.IOException;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +36,10 @@ public class TransactionDialogService implements DialogService {
 	@Autowired
 	private SlackConfigurationProperties slackConfigurationProperties;
 
+	@Autowired
+	private DialogOpenResponseHandler dialogOpenResponseHandler;
+
 	@Override
-	@PostConstruct
 	public void openDialog(final String triggerId) {
 		try {
 			final List<User> users = slack.methods()
@@ -49,8 +49,8 @@ public class TransactionDialogService implements DialogService {
 			final List<DialogOption> usersDialogOptions = userConverter.convert(users);
 			final Dialog dialog = slackTransactionDialogFactory.createTransactionsDialog(usersDialogOptions);
 
-			slack.methods().dialogOpen(DialogOpenRequest.builder().token(slackConfigurationProperties.getOauthToken())
-					.triggerId(triggerId).dialog(dialog).build());
+			dialogOpenResponseHandler.handleDialogOpenResponse(slack.methods().dialogOpen(DialogOpenRequest.builder()
+					.token(slackConfigurationProperties.getOauthToken()).triggerId(triggerId).dialog(dialog).build()));
 		} catch (IOException | SlackApiException exception) {
 			throw new DialogOpenException(exception);
 		}

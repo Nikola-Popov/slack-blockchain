@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.slack.blockchain.services.ProcessorInitiatorService;
-import io.slack.blockchain.services.dialogs.DialogServiceFactory;
+import io.slack.blockchain.services.dialogs.DialogServiceBeanLoader;
 import io.slack.blockchain.services.dialogs.EmailConfigurationDialogService;
 import io.slack.blockchain.services.dialogs.TransactionDialogService;
 
@@ -18,16 +18,16 @@ public class SlackRestController {
 	private ProcessorInitiatorService processorInitiatorService;
 
 	@Autowired
-	private DialogServiceFactory dialogServiceFactory;
+	private DialogServiceBeanLoader dialogServiceBeanLoader;
 
 	@PostMapping(path = "/configure", produces = APPLICATION_JSON_UTF8_VALUE)
 	public void openConfigurationDialog(@RequestParam("trigger_id") final String triggerId) {
-		dialogServiceFactory.createDialogService(triggerId, EmailConfigurationDialogService.class);
+		dialogServiceBeanLoader.getDialogService(EmailConfigurationDialogService.class).openDialog(triggerId);
 	}
 
 	@PostMapping(path = "/transaction", produces = APPLICATION_JSON_UTF8_VALUE)
 	public void openTransactionDialog(@RequestParam("trigger_id") final String triggerId) {
-		dialogServiceFactory.createDialogService(triggerId, TransactionDialogService.class);
+		dialogServiceBeanLoader.getDialogService(TransactionDialogService.class).openDialog(triggerId);
 	}
 
 	@PostMapping(path = "/dialog/submit", produces = APPLICATION_JSON_UTF8_VALUE)

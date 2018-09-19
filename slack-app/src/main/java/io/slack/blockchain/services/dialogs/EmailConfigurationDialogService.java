@@ -2,8 +2,6 @@ package io.slack.blockchain.services.dialogs;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,14 +27,15 @@ public class EmailConfigurationDialogService implements DialogService {
 	@Autowired
 	private SlackConfigurationProperties slackConfigurationProperties;
 
+	@Autowired
+	private DialogOpenResponseHandler dialogOpenResponseHandler;
+
 	@Override
-	@PostConstruct
 	public void openDialog(String triggerId) {
 		try {
 			final Dialog dialog = emailConfigurationDialogFactory.createEmailConfigurationDialog();
-
-			slack.methods().dialogOpen(DialogOpenRequest.builder().token(slackConfigurationProperties.getOauthToken())
-					.triggerId(triggerId).dialog(dialog).build());
+			dialogOpenResponseHandler.handleDialogOpenResponse(slack.methods().dialogOpen(DialogOpenRequest.builder()
+					.token(slackConfigurationProperties.getOauthToken()).triggerId(triggerId).dialog(dialog).build()));
 		} catch (IOException | SlackApiException exception) {
 			throw new DialogOpenException(exception);
 		}
