@@ -1,5 +1,7 @@
 package io.slack.blockchain.interactive.components.dialogs.parsers;
 
+import static io.slack.blockchain.interactive.components.dialogs.constants.DialogPayloadConstants.SUBMISSION;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +18,7 @@ public class DialogPayloadParser {
 	}
 
 	public <S> S parseSubmission(final String payload, Class<S> submissionClass) {
-		return gsonJsonService.fromJson(gsonJsonService.parse(payload).getAsJsonObject(), submissionClass);
+		return gsonJsonService.fromJson(gsonJsonService.parse(payload).getAsJsonObject().get(SUBMISSION),
+				submissionClass);
 	}
 }

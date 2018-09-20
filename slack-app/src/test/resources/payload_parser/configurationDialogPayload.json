@@ -1,0 +1,6 @@
+{
+	"type": "dialog_submission",
+	"submission": {
+		"email":"email@test.com"
+	}
+}

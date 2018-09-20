@@ -1,0 +1,14 @@
+{
+	"type": "dialog_submission",
+	"submission": {
+	},
+	"callback_id": "callbackId",
+	"team": {
+		"id": "teamId"
+	},
+	"user": {
+		"id": "userId",
+		"name": "username"
+	},
+	"response_url": "https://hooks.slack.com/app/T012AB0A1/123456789/JpmK0yzoZDeRiqfeduTBYXWQ"
+}

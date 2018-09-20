@@ -1,0 +1,8 @@
+{
+	"type": "dialog_submission",
+	"submission": {
+		"amount": "10",
+		"currency": "BTC",
+		"user": "displayName"
+	}
+}
