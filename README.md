@@ -4,7 +4,7 @@ Slack application that allows you to make transactions easily within Slack. All 
 
 To begin with, please refer to the [Manual](#manual) on how to use the application.
 
-[![codecov](https://codecov.io/gh/Nikola-Popov/slack-blockchain-app/branch/master/graph/badge.svg)](https://codecov.io/gh/Nikola-Popov/slack-blockchain-app)
+[![Build Status](https://travis-ci.com/Nikola-Popov/slack-blockchain-app.svg?branch=master)](https://travis-ci.com/Nikola-Popov/slack-blockchain-app)
 
 ## Table of Contents 
 
@@ -85,7 +85,7 @@ $ ngrok
 ```
 - Finally, go to https://api.slack.com/apps and if you have the right acess you should see the app there. Manually configure the`Slash Commands` and the `Interactive components` request urls with the url provided by ngrok.
 
-
+---
 ## License
 
 TBD
