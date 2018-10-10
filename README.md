@@ -86,13 +86,6 @@ $ ngrok
 - Finally, go to https://api.slack.com/apps and if you have the right acess you should see the app there. Manually configure the`Slash Commands` and the `Interactive components` request urls with the url provided by ngrok.
 
 
-### Contributing
-1. 🍴 Fork this repo. 
-2. 🔨 HACK AWAY! But don`t forget to write tests! :)
-3. 🔃 Create a new pull request using the <a href="https://github.com/Nikola-Popov/slack-blockchain-app/compare/" target="_blank">`compare changes tool`</a>.
-
----
-
 ## License
 
 TBD
