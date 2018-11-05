@@ -1,6 +1,7 @@
 package io.slack.blockchain.interactive.components.dialogs.elements;
 
 import static com.github.seratch.jslack.api.model.dialog.DialogSubType.NUMBER;
+import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.AMOUNT_DIALOG_TEXT_ELEMENT;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.AmountDialogTextElementConstants.AMOUNT_ELEMENT_PLACEHOLDER;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.AmountDialogTextElementConstants.AMOUNT_LABEL;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.AmountDialogTextElementConstants.TEXT_ELEMENT_MAX_ELEMENT_LENGTH;
@@ -10,6 +11,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -19,6 +21,7 @@ import com.github.seratch.jslack.api.model.dialog.DialogTextElement;
 @SpringBootTest
 public class AmountTextElementTest {
 	@Autowired
+	@Qualifier(AMOUNT_DIALOG_TEXT_ELEMENT)
 	private DialogTextElement amountTextElement;
 
 	private static final DialogTextElement DIALOG_TEXT_ELEMENT = DialogTextElement.builder().label(AMOUNT_LABEL)

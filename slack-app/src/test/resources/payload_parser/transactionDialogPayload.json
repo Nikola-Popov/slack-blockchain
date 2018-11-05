@@ -2,7 +2,7 @@
 	"type": "dialog_submission",
 	"submission": {
 		"amount": "10",
-		"currency": "BTC",
+		"currency": "BitcoinCash",
 		"user": "displayName"
 	}
 }
