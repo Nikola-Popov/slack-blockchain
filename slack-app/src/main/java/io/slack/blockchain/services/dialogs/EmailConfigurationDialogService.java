@@ -25,10 +25,10 @@ public class EmailConfigurationDialogService implements DialogService {
 	private EmailConfigurationDialogFactory emailConfigurationDialogFactory;
 
 	@Autowired
-	private SlackConfigurationProperties slackConfigurationProperties;
+	private DialogOpenResponseHandler dialogOpenResponseHandler;
 
 	@Autowired
-	private DialogOpenResponseHandler dialogOpenResponseHandler;
+	private SlackConfigurationProperties slackConfigurationProperties;
 
 	@Override
 	public void openDialog(String triggerId) {

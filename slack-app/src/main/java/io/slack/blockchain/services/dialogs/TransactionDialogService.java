@@ -34,10 +34,10 @@ public class TransactionDialogService implements DialogService {
 	private TransactionsDialogFactory slackTransactionDialogFactory;
 
 	@Autowired
-	private SlackConfigurationProperties slackConfigurationProperties;
+	private DialogOpenResponseHandler dialogOpenResponseHandler;
 
 	@Autowired
-	private DialogOpenResponseHandler dialogOpenResponseHandler;
+	private SlackConfigurationProperties slackConfigurationProperties;
 
 	@Override
 	public void openDialog(final String triggerId) {

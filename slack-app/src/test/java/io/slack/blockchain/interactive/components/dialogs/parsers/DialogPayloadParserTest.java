@@ -28,7 +28,7 @@ public class DialogPayloadParserTest {
 			new SlackUser.User("username", "userId"), new SlackUser.Team("teamId"), "callbackId",
 			"https://hooks.slack.com/app/T012AB0A1/123456789/JpmK0yzoZDeRiqfeduTBYXWQ");
 	private static final TransactionDialogSubmission TRANSACTION_DIALOG_SUBMISSION = new TransactionDialogSubmission(10,
-			Currency.BTC, "displayName");
+			Currency.BitcoinCash, "displayName");
 	private static final ConfigurationDialogSubmission CONFIGURATION_DIALOG_SUBMISSION = new ConfigurationDialogSubmission(
 			"email@test.com");
 	private static String IDENTITY_PAYLOAD;
