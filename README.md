@@ -1,6 +1,7 @@
-# Slack-Blockchain-app
+# Slack-Coinbase-app
 
-Slack application that allows you to make transactions easily within Slack. All this functionality is served as a simple, intuitive and native for Slack user interface. 
+Java application that integrates two well-known free-to-use apps - Slack and Coinbase. 
+This allows you to make online cryptocurrency transactions easily within Slack. All this functionality is served as a simple, intuitive and native for Slack user interface. 
 
 To begin with, please refer to the [Manual](#manual) on how to use the application.
 
@@ -26,13 +27,13 @@ To begin with, please refer to the [Manual](#manual) on how to use the applicati
 ---
 
 ## Manual
-As by design this application is tighly coupled with [coinbase](https://www.coinbase.com/dashboard) mainly because transactions made between coinbase users are made off-the-blockchain - in brief without paying transaction fees. So be sure to sign up there if you haven`t done this already.
+As by design, this application is intentionally tighly coupled with [coinbase](https://www.coinbase.com/dashboard) mainly because transactions made between coinbase users are made off-the-blockchain - in brief without paying transaction fees. So be sure to sign up there if you haven`t done this already.
 
 In order to use the app properly one should `/configure [coinbase email address]` prior to start sending funds. One can       change the email as many times as he/she wants. But keep in mind that one email is mapped to a single slack user (you can     cannot have two or more emails configured at the same time). 
 After a successful configuration one should receive the following message: `Coinbase email configured successfuly!
 You are now able to make transactions.`
  
-Finally, typing `/transaction` in the slack's text box and filling all the all the required fields in the popped-up Transaction dialog will send the selected amount of funds to a selected user from this channel. If the transaction is successful one should see `All good to go! You have sucessfuly created a transaction.`, otherwise an error message is displayed.
+Afterwards, typing `/transaction` in the slack's text box and filling all the all the required fields in the popped-up Transaction dialog will send the selected amount of funds to a selected user from this channel. If the transaction is successful one should see `All good to go! You have sucessfuly created a transaction.`, otherwise an error message is displayed.
 
 ---
 
