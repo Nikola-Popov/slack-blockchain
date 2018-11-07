@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import io.slack.blockchain.coinbase.security.oauth.configurations.CoinbaseConfigurationProperties;
-import io.slack.blockchain.commons.miscellaneous.trading.Currency;
 
 @Component
 public class CoinbaseAuthorizationEndpointBuilderUtil {
@@ -36,8 +35,8 @@ public class CoinbaseAuthorizationEndpointBuilderUtil {
 				.queryParam(RESPONSE_TYPE, CODE).queryParam(CLIENT_ID, coinbaseConfigurationProperties.getClientId())
 				.queryParam(SCOPE, WALLET_TRANSACTIONS_SEND)
 				.queryParam(META_SEND_LIMIT_AMOUNT, coinbaseConfigurationProperties.getDefaultSendLimmit())
-				.queryParam(META_SEND_LIMIT_CURRENCY, Currency.Bitcoin.getCurrencyDisplayName())
-				.queryParam(META_SEND_LIMIT_PERIOD, EXPIRE_EVERYDAY).queryParam(STATE, state).build().toUriString();
+				.queryParam(META_SEND_LIMIT_CURRENCY, "USD").queryParam(META_SEND_LIMIT_PERIOD, EXPIRE_EVERYDAY)
+				.queryParam(STATE, state).build().toUriString();
 	}
 
 	public String buildAccessTokenEndpoint(final String code, final String redirectUri) {
