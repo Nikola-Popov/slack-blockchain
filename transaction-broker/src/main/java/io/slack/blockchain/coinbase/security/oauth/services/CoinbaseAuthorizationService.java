@@ -8,19 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import io.slack.blockchain.coinbase.security.oauth.domain.OAuthResponse;
+import io.slack.blockchain.coinbase.security.oauth.domain.CoinbaseOAuthResponse;
 import io.slack.blockchain.coinbase.security.oauth.exceptions.AuthorizationException;
 import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
 import io.slack.blockchain.commons.http.RequestEntityFactory;
-import io.slack.blockchain.commons.services.GsonJsonService;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
 public class CoinbaseAuthorizationService implements AuthorizationService {
-	@Autowired
-	private GsonJsonService gsonJsonService;
-
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -30,26 +26,22 @@ public class CoinbaseAuthorizationService implements AuthorizationService {
 	@Autowired
 	private CoinbaseAuthorizationEndpointBuilderUtil coinbaseAuthorizationEndpointBuilderUtil;
 
-	private final String coinbaseAcessTokenEndpoint;
-
-	public CoinbaseAuthorizationService(final String code) {
-		coinbaseAcessTokenEndpoint = coinbaseAuthorizationEndpointBuilderUtil.buildAccessTokenEndpoint(code,
-				"http://bb0b256d.ngrok.io/coinbase/authorization/granted");
-	}
-
 	@Override
-	public String acquireAccessToken() throws AuthorizationException {
-		ResponseEntity<OAuthResponse> responseEntity = null;
+	public String acquireAccessTokenConsumingCode(final String code) throws AuthorizationException {
+		final String coinbaseAcessTokenEndpoint = coinbaseAuthorizationEndpointBuilderUtil
+				.buildAccessTokenEndpoint(code, "http://9ac41555.ngrok.io/coinbase/authorization/granted");
+		ResponseEntity<CoinbaseOAuthResponse> responseEntity = null;
 		try {
 			responseEntity = restTemplate.exchange(
-					requestEntityFactory.createPostRequestEntity(coinbaseAcessTokenEndpoint), OAuthResponse.class);
+					requestEntityFactory.createPostRequestEntity(coinbaseAcessTokenEndpoint),
+					CoinbaseOAuthResponse.class);
+			System.out.println(responseEntity);
 		} catch (RestClientException | URISyntaxException exception) {
 			final String errorMessage = "Coinbase OAuth service failed to authorize the request. Returned response: "
-					+ responseEntity;
+					+ responseEntity.getBody();
 			log.error(errorMessage, exception);
 			throw new AuthorizationException(errorMessage);
 		}
-
-		return responseEntity.getBody().accessToken;
+		return responseEntity.getBody().getAccessToken();
 	}
 }

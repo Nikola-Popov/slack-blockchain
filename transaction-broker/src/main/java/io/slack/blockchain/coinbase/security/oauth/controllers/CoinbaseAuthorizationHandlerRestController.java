@@ -21,6 +21,6 @@ public class CoinbaseAuthorizationHandlerRestController {
 	public void authorize(@RequestParam(CODE) final String code, @RequestParam(STATE) final String state)
 			throws AuthorizationException {
 		// TODO: verify state
-		authorizationService.acquireAccessToken();
+		authorizationService.acquireAccessTokenConsumingCode(code);
 	}
 }
