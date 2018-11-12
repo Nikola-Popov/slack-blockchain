@@ -1,5 +1,7 @@
 package io.slack.blockchain.coinbase.security.oauth.services;
 
+import static org.springframework.util.StringUtils.isEmpty;
+
 import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class CoinbaseAuthorizationService implements AuthorizationService {
 
 	@Override
 	public String acquireAccessTokenConsumingCode(final String code) throws AuthorizationException {
+		if (isEmpty(code)) {
+			throw new IllegalArgumentException("The provided code is empty!");
+		}
 		final String coinbaseAcessTokenEndpoint = coinbaseAuthorizationEndpointBuilderUtil
 				.buildAccessTokenEndpoint(code, "http://9ac41555.ngrok.io/coinbase/authorization/granted");
 		ResponseEntity<CoinbaseOAuthResponse> responseEntity = null;
@@ -35,10 +40,8 @@ public class CoinbaseAuthorizationService implements AuthorizationService {
 			responseEntity = restTemplate.exchange(
 					requestEntityFactory.createPostRequestEntity(coinbaseAcessTokenEndpoint),
 					CoinbaseOAuthResponse.class);
-			System.out.println(responseEntity);
 		} catch (RestClientException | URISyntaxException exception) {
-			final String errorMessage = "Coinbase OAuth service failed to authorize the request. Returned response: "
-					+ responseEntity.getBody();
+			final String errorMessage = "Coinbase OAuth service failed to authorize the request";
 			log.error(errorMessage, exception);
 			throw new AuthorizationException(errorMessage);
 		}
