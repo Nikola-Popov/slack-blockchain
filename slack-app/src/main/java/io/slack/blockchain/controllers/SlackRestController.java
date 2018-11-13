@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.slack.blockchain.coinbase.security.oauth.clients.CoinbaseAuthorizationInitiator;
 import io.slack.blockchain.services.ProcessorInitiatorService;
 import io.slack.blockchain.services.dialogs.DialogServiceBeanLoader;
+import io.slack.blockchain.services.dialogs.EmailConfigurationDialogService;
 import io.slack.blockchain.services.dialogs.TransactionDialogService;
 
 @RestController("/slack")
@@ -19,15 +19,10 @@ public class SlackRestController {
 
 	@Autowired
 	private DialogServiceBeanLoader dialogServiceBeanLoader;
-	@Autowired
-	CoinbaseAuthorizationInitiator c;
 
 	@PostMapping(path = "/configure", produces = APPLICATION_JSON_UTF8_VALUE)
 	public void openConfigurationDialog(@RequestParam("trigger_id") final String triggerId) {
-		// dialogServiceBeanLoader.getDialogService(EmailConfigurationDialogService.class).openDialog(triggerId);
-
-		c.initiateAuthorization();
-
+		dialogServiceBeanLoader.getDialogService(EmailConfigurationDialogService.class).openDialog(triggerId);
 	}
 
 	@PostMapping(path = "/transaction", produces = APPLICATION_JSON_UTF8_VALUE)
@@ -39,5 +34,4 @@ public class SlackRestController {
 	public void processDialog(@RequestParam("payload") final String payload) {
 		processorInitiatorService.initiateProcessing(payload);
 	}
-
 }
