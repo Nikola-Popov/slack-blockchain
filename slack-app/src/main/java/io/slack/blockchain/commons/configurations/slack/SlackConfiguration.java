@@ -3,6 +3,7 @@ package io.slack.blockchain.commons.configurations.slack;
 import static com.github.seratch.jslack.api.model.dialog.DialogSubType.EMAIL;
 import static com.github.seratch.jslack.api.model.dialog.DialogSubType.NUMBER;
 import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.AMOUNT_DIALOG_TEXT_ELEMENT;
+import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.CURRENCY_SELECT_DIALOG_TEXT_ELEMENT;
 import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.EMAIL_DIALOG_TEXT_ELEMENT;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.configuration.EmailConfigurationDialogTextElementConstants.EMAIL_ELEMENT_PLACEHOLDER;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.configuration.EmailConfigurationDialogTextElementConstants.EMAIL_LABEL;
@@ -17,6 +18,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.github.seratch.jslack.Slack;
+import com.github.seratch.jslack.api.model.dialog.Dialog;
+import com.github.seratch.jslack.api.model.dialog.Dialog.DialogBuilder;
 import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 import com.github.seratch.jslack.api.model.dialog.DialogTextElement;
 
@@ -43,11 +46,16 @@ public class SlackConfiguration {
 				.placeholder(EMAIL_ELEMENT_PLACEHOLDER).maxLength(EMAIL_MAX_LENGHTH).subtype(EMAIL).build();
 	}
 
-	@Bean
+	@Bean(name = CURRENCY_SELECT_DIALOG_TEXT_ELEMENT)
 	public DialogSelectElement createCurrencySelectElement(final CurrencyProvider currencyProvider) {
 		return DialogSelectElement.builder().name(CURRENCY_ELEMENT_LABEL.toLowerCase()).label(CURRENCY_ELEMENT_LABEL)
 				.placeholder(CURRENCY_ELEMENT_PLACEHOLDER).options(currencyProvider.provideSupportedCurrencies())
 				.build();
+	}
+
+	@Bean
+	public DialogBuilder createDialogBuilder() {
+		return Dialog.builder();
 	}
 
 	@Bean

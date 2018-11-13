@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.github.seratch.jslack.api.model.dialog.Dialog;
+import com.github.seratch.jslack.api.model.dialog.Dialog.DialogBuilder;
 import com.github.seratch.jslack.api.model.dialog.DialogTextElement;
 
 @Component
@@ -19,8 +20,11 @@ public class EmailConfigurationDialogFactory {
 	@Qualifier(EMAIL_DIALOG_TEXT_ELEMENT)
 	private DialogTextElement emailConfigurationTextElement;
 
+	@Autowired
+	private DialogBuilder dialogBuilder;
+
 	public Dialog createEmailConfigurationDialog() {
-		return Dialog.builder().title(CONFIGURATION_DIALOG_TITlE).callbackId(CONFIGURATION_DIALOG_CALLBACK_ID)
+		return dialogBuilder.title(CONFIGURATION_DIALOG_TITlE).callbackId(CONFIGURATION_DIALOG_CALLBACK_ID)
 				.elements(asList(emailConfigurationTextElement)).submitLabel(SUBMIT_BUTTON_LABEL).build();
 	}
 }
