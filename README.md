@@ -7,6 +7,7 @@ To begin with, please refer to the [Manual](#manual) on how to use the applicati
 
 [![Build Status](https://travis-ci.com/Nikola-Popov/slack-coinbase-app.svg?branch=master)](https://travis-ci.com/Nikola-Popov/slack-coinbase-app)
 [![codecov](https://codecov.io/gh/Nikola-Popov/slack-coinbase-app/branch/master/graph/badge.svg)](https://codecov.io/gh/Nikola-Popov/slack-coinbase-app)
+[![sonarcloud](https://sonarcloud.io/api/project_badges/measure?project=Nikola-Popov_slack-coinbase-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=Nikola-Popov_slack-coinbase-app)
 ## Table of Contents 
 
 - [Features](#features)
