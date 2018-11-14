@@ -1,6 +1,7 @@
 package io.slack.blockchain.interactive.components.dialogs.factories;
 
 import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.AMOUNT_DIALOG_TEXT_ELEMENT;
+import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.CURRENCY_SELECT_DIALOG_TEXT_ELEMENT;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.CREATE_BUTTON_LABEL;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.TRANSACTION_DIALOG_CALLBACK_ID;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.TRANSACTION_DIALOG_TITlE;
@@ -13,10 +14,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.Dialog.DialogBuilder;
@@ -24,33 +26,33 @@ import com.github.seratch.jslack.api.model.dialog.DialogOption;
 import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 import com.github.seratch.jslack.api.model.dialog.DialogTextElement;
 
-import io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants;
 import io.slack.blockchain.interactive.components.dialogs.elements.UsersSelectElementFactory;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class TransactionsDialogFactoryTest {
 	@InjectMocks
 	@Autowired
 	private TransactionsDialogFactory transactionsDialogFactory;
 
-	@Mock
-	@Qualifier(BeanConfigurationConstants.CURRENCY_SELECT_DIALOG_TEXT_ELEMENT)
+	@MockBean
+	@Qualifier(CURRENCY_SELECT_DIALOG_TEXT_ELEMENT)
 	private DialogSelectElement currencySelectElementMock;
 
-	@Mock
+	@MockBean
 	@Qualifier(AMOUNT_DIALOG_TEXT_ELEMENT)
 	private DialogTextElement amountTextElementMock;
 
-	@Mock
+	@MockBean
 	private UsersSelectElementFactory usersSelectElementFactoryMock;
 
-	@Mock
+	@MockBean
 	private DialogBuilder dialogBuilderMock;
 
-	@Mock
+	@MockBean
 	private DialogSelectElement usersSelectElementMock;
 
-	@Mock
+	@MockBean
 	private Dialog dialogMock;
 
 	@Before
