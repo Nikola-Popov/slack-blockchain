@@ -40,10 +40,8 @@ public class TransactionsDialogFactory {
 	public Dialog createTransactionsDialog(final List<DialogOption> usersDialogOptions) {
 		final DialogSelectElement usersSelectElement = usersSelectElementFactory
 				.createUsersSelectElementBasedOn(usersDialogOptions);
-		DialogBuilder elements = dialogBuilder.title(TRANSACTION_DIALOG_TITlE).callbackId(TRANSACTION_DIALOG_CALLBACK_ID)
-				.elements(asList(amountTextElement, currencySelectElement, usersSelectElement));
-		DialogBuilder submitLabel = elements
-				.submitLabel(CREATE_BUTTON_LABEL);
-		return submitLabel.build();
+		return dialogBuilder.title(TRANSACTION_DIALOG_TITlE).callbackId(TRANSACTION_DIALOG_CALLBACK_ID)
+				.elements(asList(amountTextElement, currencySelectElement, usersSelectElement))
+				.submitLabel(CREATE_BUTTON_LABEL).build();
 	}
 }
