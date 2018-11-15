@@ -18,6 +18,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.github.seratch.jslack.Slack;
+import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest;
+import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest.DialogOpenRequestBuilder;
+import com.github.seratch.jslack.api.methods.request.users.UsersListRequest;
+import com.github.seratch.jslack.api.methods.request.users.UsersListRequest.UsersListRequestBuilder;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.Dialog.DialogBuilder;
 import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
@@ -66,5 +70,15 @@ public class SlackConfiguration {
 	@Bean
 	public UsersSelectElementFactory createUsersSelectElementFactory() {
 		return new UsersSelectElementFactory();
+	}
+
+	@Bean
+	public DialogOpenRequestBuilder createDialogOpenRequestBuilder() {
+		return DialogOpenRequest.builder();
+	}
+
+	@Bean
+	public UsersListRequestBuilder createUsersListRequestBuilder() {
+		return UsersListRequest.builder();
 	}
 }

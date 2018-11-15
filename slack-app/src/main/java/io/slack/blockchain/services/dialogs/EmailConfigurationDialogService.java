@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.methods.SlackApiException;
-import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest;
+import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest.DialogOpenRequestBuilder;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 
 import io.slack.blockchain.commons.configurations.slack.SlackConfigurationProperties;
@@ -30,11 +30,14 @@ public class EmailConfigurationDialogService implements DialogService {
 	@Autowired
 	private SlackConfigurationProperties slackConfigurationProperties;
 
+	@Autowired
+	private DialogOpenRequestBuilder dialogOpenRequestBuilder;
+
 	@Override
 	public void openDialog(String triggerId) {
 		try {
 			final Dialog dialog = emailConfigurationDialogFactory.createEmailConfigurationDialog();
-			dialogOpenResponseHandler.handleDialogOpenResponse(slack.methods().dialogOpen(DialogOpenRequest.builder()
+			dialogOpenResponseHandler.handleDialogOpenResponse(slack.methods().dialogOpen(dialogOpenRequestBuilder
 					.token(slackConfigurationProperties.getOauthToken()).triggerId(triggerId).dialog(dialog).build()));
 		} catch (IOException | SlackApiException exception) {
 			throw new DialogOpenException(exception);
