@@ -24,6 +24,8 @@ import com.github.seratch.jslack.api.methods.request.users.UsersListRequest;
 import com.github.seratch.jslack.api.methods.request.users.UsersListRequest.UsersListRequestBuilder;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.Dialog.DialogBuilder;
+import com.github.seratch.jslack.api.model.dialog.DialogOption;
+import com.github.seratch.jslack.api.model.dialog.DialogOption.DialogOptionBuilder;
 import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 import com.github.seratch.jslack.api.model.dialog.DialogTextElement;
 
@@ -80,5 +82,10 @@ public class SlackConfiguration {
 	@Bean
 	public UsersListRequestBuilder createUsersListRequestBuilder() {
 		return UsersListRequest.builder();
+	}
+
+	@Bean
+	public DialogOptionBuilder createDialogOptionBuilder() {
+		return DialogOption.builder();
 	}
 }

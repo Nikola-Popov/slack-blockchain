@@ -1,4 +1,4 @@
-package io.slack.blockchain.utils.converters;
+package io.slack.blockchain.utils;
 
 import org.springframework.stereotype.Component;
 
@@ -6,7 +6,8 @@ import io.slack.blockchain.domain.dialog.DialogContent;
 
 @Component
 public class DialogContentUtil {
-	public <S, D> boolean isDialogContentSubmissionAssignableFrom(final DialogContent<D> dialogContent, final Class<S> assignableSubmissionClass) {
+	public <S, D> boolean isDialogContentSubmissionAssignableFrom(final DialogContent<D> dialogContent,
+			final Class<S> assignableSubmissionClass) {
 		return dialogContent.getSubmission().getClass().isAssignableFrom(assignableSubmissionClass);
 	}
 }

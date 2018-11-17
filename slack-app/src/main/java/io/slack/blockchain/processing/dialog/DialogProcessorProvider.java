@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import io.slack.blockchain.domain.dialog.ConfigurationDialogSubmission;
 import io.slack.blockchain.domain.dialog.DialogContent;
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
-import io.slack.blockchain.utils.converters.DialogContentUtil;
+import io.slack.blockchain.utils.DialogContentUtil;
 import io.slack.blockchain.utils.converters.dialog.DialogContentConverter;
 
 @Component
