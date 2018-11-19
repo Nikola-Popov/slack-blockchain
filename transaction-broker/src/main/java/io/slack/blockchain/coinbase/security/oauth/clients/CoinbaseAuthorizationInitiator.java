@@ -29,7 +29,7 @@ public class CoinbaseAuthorizationInitiator {
 		} catch (IOException | URISyntaxException e) {
 			final String errorMessage = "Unable to open web browser to initiate authorization";
 			log.error(errorMessage, e);
-			throw new AuthorizationException(errorMessage);
+			throw new AuthorizationException(errorMessage, e);
 		}
 	}
 }

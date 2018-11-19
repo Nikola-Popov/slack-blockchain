@@ -6,4 +6,8 @@ public class AuthorizationException extends Exception {
 	public AuthorizationException(final String message) {
 		super(message);
 	}
+
+	public AuthorizationException(final String message, final Throwable throwable) {
+		super(message, throwable);
+	}
 }

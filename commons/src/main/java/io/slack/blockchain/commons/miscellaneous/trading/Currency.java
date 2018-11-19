@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum Currency {
-	Bitcoin("Bitcoin"), BitcoinCash("Bitcoin Cash"), Ethereum("Ethereum"), EthereumClassic(
-			"Ethereum Classic"), LiteCoin("LiteCoin");
+	BITCOIN("Bitcoin"), BITCOIN_CASH("Bitcoin Cash"), ETHEREUM("Ethereum"), ETHEREUM_CLASSIC(
+			"Ethereum Classic"), LITE_COIN("LiteCoin");
 
 	private String currencyDisplayName;
 
