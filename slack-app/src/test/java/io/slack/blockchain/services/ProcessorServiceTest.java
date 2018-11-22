@@ -1,6 +1,5 @@
 package io.slack.blockchain.services;
 
-import static io.slack.blockchain.domain.attachments.Status.GOOD;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,7 +21,6 @@ import io.slack.blockchain.services.dialogs.exceptions.DialogResponderException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProcessorServiceTest {
-	private static final String MESSAGE = "message";
 	private static final String RESPONSE_URL = "responseUrl";
 
 	@InjectMocks
@@ -52,13 +50,11 @@ public class ProcessorServiceTest {
 		when(dialogProcessorMock.process()).thenReturn(processingResultMock);
 		when(dialogContentMock.getDialogIdentityPayload()).thenReturn(dialogIdentityPayloadMock);
 		when(dialogIdentityPayloadMock.getResponseUrl()).thenReturn(RESPONSE_URL);
-		when(processingResultMock.getStatus()).thenReturn(GOOD);
-		when(processingResultMock.getMessage()).thenReturn(MESSAGE);
 	}
 
 	@Test(expected = DialogResponderException.class)
 	public void testProcessDialogResponderRespondThrowsException() throws Exception {
-		doThrow(DialogResponderException.class).when(dialogResponderMock).respond(RESPONSE_URL, GOOD, MESSAGE);
+		doThrow(DialogResponderException.class).when(dialogResponderMock).respond(RESPONSE_URL, processingResultMock);
 
 		processorService.process(dialogContentMock);
 	}
@@ -67,6 +63,6 @@ public class ProcessorServiceTest {
 	public void testProcess() throws Exception {
 		processorService.process(dialogContentMock);
 
-		verify(dialogResponderMock).respond(RESPONSE_URL, GOOD, MESSAGE);
+		verify(dialogResponderMock).respond(RESPONSE_URL, processingResultMock);
 	}
 }

@@ -1,10 +1,10 @@
-package io.slack.blockchain.commons.configurations.slack;
+package io.slack.blockchain.commons.configurations;
 
 import static com.github.seratch.jslack.api.model.dialog.DialogSubType.EMAIL;
 import static com.github.seratch.jslack.api.model.dialog.DialogSubType.NUMBER;
-import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.AMOUNT_DIALOG_TEXT_ELEMENT;
-import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.CURRENCY_SELECT_DIALOG_TEXT_ELEMENT;
-import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.EMAIL_DIALOG_TEXT_ELEMENT;
+import static io.slack.blockchain.commons.configurations.BeanConfigurationConstants.AMOUNT_DIALOG_TEXT_ELEMENT;
+import static io.slack.blockchain.commons.configurations.BeanConfigurationConstants.CURRENCY_SELECT_DIALOG_TEXT_ELEMENT;
+import static io.slack.blockchain.commons.configurations.BeanConfigurationConstants.EMAIL_DIALOG_TEXT_ELEMENT;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.configuration.EmailConfigurationDialogTextElementConstants.EMAIL_ELEMENT_PLACEHOLDER;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.configuration.EmailConfigurationDialogTextElementConstants.EMAIL_LABEL;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.configuration.EmailConfigurationDialogTextElementConstants.EMAIL_MAX_LENGHTH;
@@ -17,11 +17,8 @@ import static io.slack.blockchain.interactive.components.dialogs.elements.consta
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest;
 import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest.DialogOpenRequestBuilder;
-import com.github.seratch.jslack.api.methods.request.users.UsersListRequest;
-import com.github.seratch.jslack.api.methods.request.users.UsersListRequest.UsersListRequestBuilder;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 import com.github.seratch.jslack.api.model.dialog.Dialog.DialogBuilder;
 import com.github.seratch.jslack.api.model.dialog.DialogOption;
@@ -29,16 +26,10 @@ import com.github.seratch.jslack.api.model.dialog.DialogOption.DialogOptionBuild
 import com.github.seratch.jslack.api.model.dialog.DialogSelectElement;
 import com.github.seratch.jslack.api.model.dialog.DialogTextElement;
 
-import io.slack.blockchain.interactive.components.dialogs.elements.UsersSelectElementFactory;
 import io.slack.blockchain.interactive.components.dialogs.utils.CurrencyProvider;
 
 @Configuration
-public class SlackConfiguration {
-	@Bean
-	public Slack createSlack() {
-		return Slack.getInstance();
-	}
-
+public class DialogConfigurations {
 	@Bean(name = AMOUNT_DIALOG_TEXT_ELEMENT)
 	public DialogTextElement createAmountDialogTextElement() {
 		return DialogTextElement.builder().label(AMOUNT_LABEL).name(AMOUNT_LABEL.toLowerCase())
@@ -65,27 +56,13 @@ public class SlackConfiguration {
 	}
 
 	@Bean
-	public CurrencyProvider createCurrencyProvider() {
-		return new CurrencyProvider();
-	}
-
-	@Bean
-	public UsersSelectElementFactory createUsersSelectElementFactory() {
-		return new UsersSelectElementFactory();
-	}
-
-	@Bean
 	public DialogOpenRequestBuilder createDialogOpenRequestBuilder() {
 		return DialogOpenRequest.builder();
-	}
-
-	@Bean
-	public UsersListRequestBuilder createUsersListRequestBuilder() {
-		return UsersListRequest.builder();
 	}
 
 	@Bean
 	public DialogOptionBuilder createDialogOptionBuilder() {
 		return DialogOption.builder();
 	}
+
 }

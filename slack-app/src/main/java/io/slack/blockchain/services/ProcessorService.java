@@ -24,8 +24,7 @@ public class ProcessorService {
 		final DialogProcessor dialogProcessor = dialogProcessorProvider.provide(dialogContent);
 		final ProcessingResult processingResult = dialogProcessor.process();
 		try {
-			dialogResponder.respond(dialogContent.getDialogIdentityPayload().getResponseUrl(),
-					processingResult.getStatus(), processingResult.getMessage());
+			dialogResponder.respond(dialogContent.getDialogIdentityPayload().getResponseUrl(), processingResult);
 		} catch (URISyntaxException e) {
 			throw new DialogResponderException("Failed to respond to Slack after dialog processing!", e);
 		}

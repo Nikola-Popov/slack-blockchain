@@ -1,7 +1,7 @@
 package io.slack.blockchain.interactive.components.dialogs.factories;
 
-import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.AMOUNT_DIALOG_TEXT_ELEMENT;
-import static io.slack.blockchain.commons.configurations.slack.BeanConfigurationConstants.CURRENCY_SELECT_DIALOG_TEXT_ELEMENT;
+import static io.slack.blockchain.commons.configurations.BeanConfigurationConstants.AMOUNT_DIALOG_TEXT_ELEMENT;
+import static io.slack.blockchain.commons.configurations.BeanConfigurationConstants.CURRENCY_SELECT_DIALOG_TEXT_ELEMENT;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.CREATE_BUTTON_LABEL;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.TRANSACTION_DIALOG_CALLBACK_ID;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.TransactionDialogConstants.TRANSACTION_DIALOG_TITlE;

@@ -1,6 +1,6 @@
 package io.slack.blockchain.controllers.exception.handler;
 
-import static io.slack.blockchain.domain.attachments.Status.DANGER;
+import static io.slack.blockchain.domain.messages.AttachmentStatusColor.DANGER;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.ResponseEntity.badRequest;
 import static org.springframework.http.ResponseEntity.status;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.seratch.jslack.api.model.Attachment.AttachmentBuilder;
 import com.google.gson.JsonSyntaxException;
 
-import io.slack.blockchain.commons.factories.AttachmentResponseFactory;
-import io.slack.blockchain.domain.attachments.Attachment;
+import io.slack.blockchain.commons.AttachmentResponseFactory;
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.services.dialogs.exceptions.DialogResponderException;
@@ -30,6 +30,9 @@ public class SlackDialogExceptionHandler {
 	@Autowired
 	private AttachmentResponseFactory attachmentResponseFactory;
 
+	@Autowired
+	private AttachmentBuilder attachmentBuilder;
+
 	@ExceptionHandler(DialogOpenException.class)
 	public ResponseEntity<AttachmentResponse> handleDialogOpenException() {
 		return createInternalServerErrorResponse(DIALOG_OPEN_ERROR_MESSAGE);
@@ -38,7 +41,7 @@ public class SlackDialogExceptionHandler {
 	@ExceptionHandler(JsonSyntaxException.class)
 	public ResponseEntity<AttachmentResponse> handleSubmittedTransactionInvalidDataException() {
 		return badRequest().body(attachmentResponseFactory.createAttachmentResponse(
-				Attachment.builder().text(INVALID_AMOUNT_RESPONSE_MESSAGE).status(DANGER).build()));
+				attachmentBuilder.text(INVALID_AMOUNT_RESPONSE_MESSAGE).color(DANGER).build()));
 	}
 
 	@ExceptionHandler(DialogResponderException.class)
@@ -53,6 +56,6 @@ public class SlackDialogExceptionHandler {
 
 	private ResponseEntity<AttachmentResponse> createInternalServerErrorResponse(final String responseMessage) {
 		return status(INTERNAL_SERVER_ERROR).body(attachmentResponseFactory
-				.createAttachmentResponse(Attachment.builder().text(responseMessage).status(DANGER).build()));
+				.createAttachmentResponse(attachmentBuilder.text(responseMessage).color(DANGER).build()));
 	}
 }

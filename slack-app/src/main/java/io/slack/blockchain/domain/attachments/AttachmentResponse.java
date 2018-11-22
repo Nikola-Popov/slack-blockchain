@@ -4,6 +4,8 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
+import com.github.seratch.jslack.api.model.Attachment;
+
 import lombok.Data;
 
 @Data

@@ -1,8 +1,9 @@
-package io.slack.blockchain.commons.factories;
+package io.slack.blockchain.commons;
 
 import org.springframework.stereotype.Component;
 
-import io.slack.blockchain.domain.attachments.Attachment;
+import com.github.seratch.jslack.api.model.Attachment;
+
 import io.slack.blockchain.domain.attachments.AttachmentResponse;
 
 @Component

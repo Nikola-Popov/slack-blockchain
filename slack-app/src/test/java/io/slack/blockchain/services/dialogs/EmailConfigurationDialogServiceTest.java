@@ -21,7 +21,7 @@ import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest.Di
 import com.github.seratch.jslack.api.methods.response.dialog.DialogOpenResponse;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 
-import io.slack.blockchain.commons.configurations.slack.SlackConfigurationProperties;
+import io.slack.blockchain.commons.configurations.SlackConfigurationProperties;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.interactive.components.dialogs.factories.EmailConfigurationDialogFactory;
 

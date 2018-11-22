@@ -1,4 +1,4 @@
-package io.slack.blockchain.commons.configurations.slack;
+package io.slack.blockchain.commons.configurations;
 
 public final class BeanConfigurationConstants {
 	public static final String AMOUNT_DIALOG_TEXT_ELEMENT = "amountDialogTextElement";

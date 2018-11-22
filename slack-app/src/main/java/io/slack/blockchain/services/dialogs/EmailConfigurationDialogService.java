@@ -10,7 +10,7 @@ import com.github.seratch.jslack.api.methods.SlackApiException;
 import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest.DialogOpenRequestBuilder;
 import com.github.seratch.jslack.api.model.dialog.Dialog;
 
-import io.slack.blockchain.commons.configurations.slack.SlackConfigurationProperties;
+import io.slack.blockchain.commons.configurations.SlackConfigurationProperties;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.interactive.components.dialogs.factories.EmailConfigurationDialogFactory;
 import lombok.Setter;

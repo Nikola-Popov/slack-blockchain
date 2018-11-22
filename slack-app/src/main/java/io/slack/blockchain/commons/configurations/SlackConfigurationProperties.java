@@ -1,4 +1,4 @@
-package io.slack.blockchain.commons.configurations.slack;
+package io.slack.blockchain.commons.configurations;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
