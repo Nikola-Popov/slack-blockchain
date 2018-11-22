@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import io.slack.blockchain.domain.dialog.ConfigurationDialogSubmission;
 import io.slack.blockchain.domain.dialog.DialogContent;
 import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
+import io.slack.blockchain.domain.processing.ProcessingResult.ProcessingResultBuilder;
 import io.slack.blockchain.utils.DialogContentUtil;
 import io.slack.blockchain.utils.converters.dialog.DialogContentConverter;
 
@@ -20,13 +21,17 @@ public class DialogProcessorProvider {
 	@Autowired
 	private DialogContentUtil dialogContentUtil;
 
+	@Autowired
+	private ProcessingResultBuilder processingResultBuilder;
+
 	public <S> DialogProcessor provide(final DialogContent<S> dialogContent) {
 		if (dialogContentUtil.isDialogContentSubmissionAssignableFrom(dialogContent,
 				TransactionDialogSubmission.class)) {
 			return new TransactionDialogProcessor(transactionDialogContentConverter.convert(dialogContent));
 		} else if (dialogContentUtil.isDialogContentSubmissionAssignableFrom(dialogContent,
 				ConfigurationDialogSubmission.class)) {
-			return new ConfigurationDialogProcessor(configurationDialogContentConverter.convert(dialogContent));
+			return new ConfigurationDialogProcessor(configurationDialogContentConverter.convert(dialogContent),
+					processingResultBuilder);
 		} else {
 			throw new IllegalArgumentException("Invalid dialog submission specified!");
 		}

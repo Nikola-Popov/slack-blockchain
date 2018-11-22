@@ -21,12 +21,12 @@ public class SlackRestController {
 	private DialogServiceBeanLoader dialogServiceBeanLoader;
 
 	@PostMapping(path = "/configure", produces = APPLICATION_JSON_UTF8_VALUE)
-	public void openConfigurationDialog(@RequestParam("trigger_id") final String triggerId) {
+	public void initiateConfiguration(@RequestParam("trigger_id") final String triggerId) {
 		dialogServiceBeanLoader.getDialogService(EmailConfigurationDialogService.class).openDialog(triggerId);
 	}
 
 	@PostMapping(path = "/transaction", produces = APPLICATION_JSON_UTF8_VALUE)
-	public void openTransactionDialog(@RequestParam("trigger_id") final String triggerId) {
+	public void initiateTransaction(@RequestParam("trigger_id") final String triggerId) {
 		dialogServiceBeanLoader.getDialogService(TransactionDialogService.class).openDialog(triggerId);
 	}
 
