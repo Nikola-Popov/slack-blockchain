@@ -1,10 +1,10 @@
-package io.slack.blockchain.coinbase.security.oauth.utils;
+package io.slack.blockchain.coinbase.broker.utils;
 
 import static java.util.UUID.randomUUID;
 
 import org.springframework.stereotype.Component;
 
-import io.slack.blockchain.coinbase.security.oauth.exceptions.InvalidResponseAuthorizationStateException;
+import io.slack.blockchain.coinbase.broker.exceptions.InvalidResponseAuthorizationStateException;
 
 @Component
 public class CoinbaseStateManagerUtil {

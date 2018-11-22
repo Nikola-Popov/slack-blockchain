@@ -1,5 +1,6 @@
 package io.slack.blockchain.interactive.components.dialogs.parsers;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -40,13 +41,13 @@ public class DialogPayloadParserTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws IOException {
-		IDENTITY_PAYLOAD = readFileToString(getFile(DIALOGS_RESOURCE_FOLDER_CLASSPATH + "identityPayload.json"));
+		IDENTITY_PAYLOAD = readFileToString(getFile(DIALOGS_RESOURCE_FOLDER_CLASSPATH + "identityPayload.json"), UTF_8);
 
 		TRANSACTION_DIALOG_PAYLOAD = readFileToString(
-				getFile(DIALOGS_RESOURCE_FOLDER_CLASSPATH + "transactionDialogPayload.json"));
+				getFile(DIALOGS_RESOURCE_FOLDER_CLASSPATH + "transactionDialogPayload.json"), UTF_8);
 
 		CONFIGURATION_DIALOG_PAYLOAD = readFileToString(
-				getFile(DIALOGS_RESOURCE_FOLDER_CLASSPATH + "configurationDialogPayload.json"));
+				getFile(DIALOGS_RESOURCE_FOLDER_CLASSPATH + "configurationDialogPayload.json"), UTF_8);
 	}
 
 	@Test

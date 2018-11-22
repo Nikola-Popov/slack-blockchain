@@ -1,4 +1,4 @@
-package io.slack.blockchain.coinbase.security.oauth.constants;
+package io.slack.blockchain.coinbase.broker.constants;
 
 public final class CoinbaseAuthorizationConstants {
 	public static final String AUTHORIZATION_URI = "/coinbase/authorization";

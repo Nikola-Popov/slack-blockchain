@@ -20,9 +20,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import io.slack.blockchain.coinbase.security.oauth.domain.CoinbaseOAuthResponse;
-import io.slack.blockchain.coinbase.security.oauth.exceptions.AuthorizationException;
-import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
+import io.slack.blockchain.coinbase.broker.domain.CoinbaseOAuthResponse;
+import io.slack.blockchain.coinbase.broker.exceptions.AuthorizationException;
+import io.slack.blockchain.coinbase.broker.services.CoinbaseAuthorizationService;
+import io.slack.blockchain.coinbase.broker.utils.CoinbaseAuthorizationEndpointBuilderUtil;
 import io.slack.blockchain.commons.http.RequestEntityFactory;
 
 @RunWith(MockitoJUnitRunner.class)

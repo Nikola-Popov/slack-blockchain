@@ -18,9 +18,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import io.slack.blockchain.coinbase.security.oauth.exceptions.AuthorizationException;
-import io.slack.blockchain.coinbase.security.oauth.factories.DesktopFactory;
-import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
+import io.slack.blockchain.coinbase.broker.clients.CoinbaseAuthorizationInitiator;
+import io.slack.blockchain.coinbase.broker.exceptions.AuthorizationException;
+import io.slack.blockchain.coinbase.broker.factories.DesktopFactory;
+import io.slack.blockchain.coinbase.broker.utils.CoinbaseAuthorizationEndpointBuilderUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CoinbaseAuthorizationInitiatorTest {

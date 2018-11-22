@@ -1,4 +1,4 @@
-package io.slack.blockchain.coinbase.security.oauth.clients;
+package io.slack.blockchain.coinbase.broker.clients;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -8,9 +8,9 @@ import java.net.URISyntaxException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import io.slack.blockchain.coinbase.security.oauth.exceptions.AuthorizationException;
-import io.slack.blockchain.coinbase.security.oauth.factories.DesktopFactory;
-import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
+import io.slack.blockchain.coinbase.broker.exceptions.AuthorizationException;
+import io.slack.blockchain.coinbase.broker.factories.DesktopFactory;
+import io.slack.blockchain.coinbase.broker.utils.CoinbaseAuthorizationEndpointBuilderUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Component

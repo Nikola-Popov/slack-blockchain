@@ -1,4 +1,4 @@
-package io.slack.blockchain.coinbase.security.oauth.factories;
+package io.slack.blockchain.coinbase.broker.factories;
 
 import static java.awt.Desktop.getDesktop;
 

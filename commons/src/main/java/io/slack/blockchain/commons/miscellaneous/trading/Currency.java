@@ -4,12 +4,14 @@ import lombok.Getter;
 
 @Getter
 public enum Currency {
-	BITCOIN("Bitcoin"), BITCOIN_CASH("Bitcoin Cash"), ETHEREUM("Ethereum"), ETHEREUM_CLASSIC(
-			"Ethereum Classic"), LITE_COIN("LiteCoin");
+	BITCOIN("Bitcoin", "BTC"), BITCOIN_CASH("Bitcoin Cash", "BCH"), ETHEREUM("Ethereum",
+			"ETH"), ETHEREUM_CLASSIC("Ethereum Classic", "ETC"), LITE_COIN("LiteCoin", "LTC");
 
-	private String currencyDisplayName;
+	private final String currencyDisplayName;
+	private final String currencyShortName;
 
-	private Currency(String currencyDisplayName) {
+	private Currency(final String currencyDisplayName, final String currencyShortName) {
 		this.currencyDisplayName = currencyDisplayName;
+		this.currencyShortName = currencyShortName;
 	}
 }

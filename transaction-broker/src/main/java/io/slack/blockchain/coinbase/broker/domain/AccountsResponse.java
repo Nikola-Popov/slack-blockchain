@@ -1,4 +1,4 @@
-package io.slack.blockchain.coinbase.security.oauth.domain;
+package io.slack.blockchain.coinbase.broker.domain;
 
 import java.util.List;
 

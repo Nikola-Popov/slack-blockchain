@@ -1,4 +1,4 @@
-package io.slack.blockchain.coinbase.security.oauth.services;
+package io.slack.blockchain.coinbase.broker.services;
 
 import static org.springframework.util.StringUtils.isEmpty;
 
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import io.slack.blockchain.coinbase.security.oauth.domain.CoinbaseOAuthResponse;
-import io.slack.blockchain.coinbase.security.oauth.exceptions.AuthorizationException;
-import io.slack.blockchain.coinbase.security.oauth.utils.CoinbaseAuthorizationEndpointBuilderUtil;
+import io.slack.blockchain.coinbase.broker.domain.CoinbaseOAuthResponse;
+import io.slack.blockchain.coinbase.broker.exceptions.AuthorizationException;
+import io.slack.blockchain.coinbase.broker.utils.CoinbaseAuthorizationEndpointBuilderUtil;
 import io.slack.blockchain.commons.http.RequestEntityFactory;
 import lombok.extern.slf4j.Slf4j;
 
