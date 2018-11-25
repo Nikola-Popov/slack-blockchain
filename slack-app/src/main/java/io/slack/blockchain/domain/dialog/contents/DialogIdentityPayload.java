@@ -1,4 +1,4 @@
-package io.slack.blockchain.domain.dialog;
+package io.slack.blockchain.domain.dialog.contents;
 
 import static io.slack.blockchain.interactive.components.dialogs.constants.DialogPayloadConstants.CALLBACK_ID;
 import static io.slack.blockchain.interactive.components.dialogs.constants.DialogPayloadConstants.RESPONSE_URL;

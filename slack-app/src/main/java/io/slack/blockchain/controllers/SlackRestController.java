@@ -7,31 +7,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.slack.blockchain.services.ProcessorInitiatorService;
-import io.slack.blockchain.services.dialogs.DialogServiceBeanLoader;
-import io.slack.blockchain.services.dialogs.EmailConfigurationDialogService;
-import io.slack.blockchain.services.dialogs.TransactionDialogService;
+import io.slack.blockchain.domain.processing.ProcessingResult;
+import io.slack.blockchain.services.ProcessorService;
+import io.slack.blockchain.services.dialogs.DialogService;
 
 @RestController("/slack")
 public class SlackRestController {
 	@Autowired
-	private ProcessorInitiatorService processorInitiatorService;
+	private ProcessorService processorService;
 
 	@Autowired
-	private DialogServiceBeanLoader dialogServiceBeanLoader;
+	private DialogService transactionDialogService;
+
+	@Autowired
+	private DialogService emailConfigurationDialogService;
 
 	@PostMapping(path = "/configure", produces = APPLICATION_JSON_UTF8_VALUE)
 	public void initiateConfiguration(@RequestParam("trigger_id") final String triggerId) {
-		dialogServiceBeanLoader.getDialogService(EmailConfigurationDialogService.class).openDialog(triggerId);
+		emailConfigurationDialogService.openDialog(triggerId);
+
 	}
 
 	@PostMapping(path = "/transaction", produces = APPLICATION_JSON_UTF8_VALUE)
 	public void initiateTransaction(@RequestParam("trigger_id") final String triggerId) {
-		dialogServiceBeanLoader.getDialogService(TransactionDialogService.class).openDialog(triggerId);
+		transactionDialogService.openDialog(triggerId);
 	}
 
 	@PostMapping(path = "/dialog/submit", produces = APPLICATION_JSON_UTF8_VALUE)
 	public void processDialog(@RequestParam("payload") final String payload) {
-		processorInitiatorService.initiateProcessing(payload);
+		final ProcessingResult processingResult = processorService.process(payload);
 	}
 }

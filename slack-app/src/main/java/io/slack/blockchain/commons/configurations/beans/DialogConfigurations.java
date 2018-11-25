@@ -1,4 +1,4 @@
-package io.slack.blockchain.commons.configurations;
+package io.slack.blockchain.commons.configurations.beans;
 
 import static com.github.seratch.jslack.api.model.dialog.DialogSubType.EMAIL;
 import static com.github.seratch.jslack.api.model.dialog.DialogSubType.NUMBER;

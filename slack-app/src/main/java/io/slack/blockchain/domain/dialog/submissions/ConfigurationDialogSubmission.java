@@ -1,4 +1,4 @@
-package io.slack.blockchain.domain.dialog;
+package io.slack.blockchain.domain.dialog.submissions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

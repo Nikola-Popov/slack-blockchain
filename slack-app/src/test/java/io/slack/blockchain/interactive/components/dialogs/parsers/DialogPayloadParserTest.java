@@ -16,9 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import io.slack.blockchain.commons.miscellaneous.trading.Currency;
-import io.slack.blockchain.domain.dialog.ConfigurationDialogSubmission;
-import io.slack.blockchain.domain.dialog.DialogIdentityPayload;
-import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
+import io.slack.blockchain.domain.dialog.contents.DialogIdentityPayload;
+import io.slack.blockchain.domain.dialog.submissions.ConfigurationDialogSubmission;
+import io.slack.blockchain.domain.dialog.submissions.TransactionDialogSubmission;
 import io.slack.blockchain.domain.users.SlackUser;
 
 @RunWith(SpringRunner.class)

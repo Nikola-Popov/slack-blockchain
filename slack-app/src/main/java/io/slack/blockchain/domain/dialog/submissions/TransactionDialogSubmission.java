@@ -1,4 +1,4 @@
-package io.slack.blockchain.domain.dialog;
+package io.slack.blockchain.domain.dialog.submissions;
 
 import io.slack.blockchain.commons.miscellaneous.trading.Currency;
 import lombok.AllArgsConstructor;
