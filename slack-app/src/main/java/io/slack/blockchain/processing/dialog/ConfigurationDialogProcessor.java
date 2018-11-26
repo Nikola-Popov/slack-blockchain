@@ -14,6 +14,8 @@ import com.github.seratch.jslack.api.model.Confirmation.ConfirmationBuilder;
 import io.slack.blockchain.domain.dialog.contents.ConfigurationDialogContent;
 import io.slack.blockchain.domain.processing.ProcessingResult;
 import io.slack.blockchain.domain.processing.ProcessingResult.ProcessingResultBuilder;
+import io.slack.blockchain.repositories.UserRepository;
+import io.slack.blockchain.utils.converters.UserConverter;
 
 @Component
 public class ConfigurationDialogProcessor implements DialogProcessor<ConfigurationDialogContent> {
@@ -36,11 +38,19 @@ public class ConfigurationDialogProcessor implements DialogProcessor<Configurati
 	@Autowired
 	private ConfirmationBuilder confirmationBuilder;
 
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private UserConverter useConverter;
+
 	@Override
 	public ProcessingResult process(ConfigurationDialogContent configurationDialogContent) {
 		/*
 		 * TODO 1)save in DB IF SUCCESS continue with execution listed below; ELSE error
 		 */
+
+		userRepository.save(useConverter.convert(configurationDialogContent));
 
 		Action action = actionBuilder.name(BUTTON_NAME).text(BUTTON_TEXT).url("").style(PRIMARY)
 				.confirm(confirmationBuilder.title(PRIVACY_POLICY).text(PRIVACY_POLICY_DISPLAY_MESSAGE)

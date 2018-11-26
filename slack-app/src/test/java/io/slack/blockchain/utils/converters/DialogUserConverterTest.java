@@ -22,7 +22,7 @@ import com.github.seratch.jslack.api.model.dialog.DialogOption;
 import com.github.seratch.jslack.api.model.dialog.DialogOption.DialogOptionBuilder;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserConverterTest {
+public class DialogUserConverterTest {
 	private static final String ID = "id";
 	private static final String REAL_NAME = "realName";
 	private static final String NAME = "name";
@@ -30,7 +30,7 @@ public class UserConverterTest {
 
 	@Autowired
 	@InjectMocks
-	private UserConverter userConverter;
+	private DialogUserConverter userConverter;
 
 	@Mock
 	private DialogOptionBuilder dialogOptionBuilderMock;

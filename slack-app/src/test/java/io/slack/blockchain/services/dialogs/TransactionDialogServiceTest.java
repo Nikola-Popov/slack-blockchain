@@ -31,7 +31,7 @@ import com.github.seratch.jslack.api.model.dialog.DialogOption;
 import io.slack.blockchain.commons.configurations.SlackConfigurationProperties;
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.interactive.components.dialogs.factories.TransactionsDialogFactory;
-import io.slack.blockchain.utils.converters.UserConverter;
+import io.slack.blockchain.utils.converters.DialogUserConverter;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TransactionDialogServiceTest {
@@ -46,7 +46,7 @@ public class TransactionDialogServiceTest {
 	private Slack slackMock;
 
 	@Mock
-	private UserConverter userConverterMock;
+	private DialogUserConverter dialogUserConverterMock;
 
 	@Mock
 	private TransactionsDialogFactory slackTransactionDialogFactoryMock;
@@ -95,7 +95,7 @@ public class TransactionDialogServiceTest {
 		when(usersListRequestBuilderMock.build()).thenReturn(usersListRequestMock);
 		when(methodsClientMock.usersList(usersListRequestMock)).thenReturn(usersListResponseMock);
 		when(usersListResponseMock.getMembers()).thenReturn(usersMock);
-		when(userConverterMock.convert(usersMock)).thenReturn(usersDialogOptionsMock);
+		when(dialogUserConverterMock.convert(usersMock)).thenReturn(usersDialogOptionsMock);
 		when(slackTransactionDialogFactoryMock.createTransactionsDialog(usersDialogOptionsMock)).thenReturn(dialogMock);
 		when(slackConfigurationPropertiesMock.getOauthToken()).thenReturn(OAUTH_TOKEN);
 		when(dialogOpenRequestBuilderMock.token(OAUTH_TOKEN)).thenReturn(dialogOpenRequestBuilderMock);
