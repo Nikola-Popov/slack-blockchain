@@ -1,6 +1,7 @@
 package io.slack.blockchain.interactive.components.dialogs.elements;
 
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.CurrencyDialogSelectElementConstants.USER_ELEMENT_LABEL;
+import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.CurrencyDialogSelectElementConstants.USER_ELEMENT_NAME;
 import static io.slack.blockchain.interactive.components.dialogs.elements.constants.transaction.CurrencyDialogSelectElementConstants.USER_ELEMENT_PLACEHOLDER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
@@ -21,7 +22,7 @@ public class UsersSelectElementTest {
 	private final static List<DialogOption> USERS_DIALOG_OPTIONS = createUsersDialogOptions();
 
 	private static final DialogSelectElement DIALOG_SELECT_ELEMENT = DialogSelectElement.builder()
-			.name(USER_ELEMENT_LABEL.toLowerCase()).label(USER_ELEMENT_LABEL).placeholder(USER_ELEMENT_PLACEHOLDER)
+			.name(USER_ELEMENT_NAME).label(USER_ELEMENT_LABEL).placeholder(USER_ELEMENT_PLACEHOLDER)
 			.options(USERS_DIALOG_OPTIONS).build();
 
 	@Before

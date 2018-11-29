@@ -1,6 +1,6 @@
 package io.slack.blockchain.coinbase.broker.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Balance {
-	@JsonProperty("amount")
+	@SerializedName("amount")
 	private Double amount;
 
-	@JsonProperty("currency")
+	@SerializedName("currency")
 	private String currency;
 }

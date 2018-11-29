@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.seratch.jslack.api.webhook.Payload;
+
 import io.slack.blockchain.domain.processing.ProcessingResult;
 import io.slack.blockchain.services.ProcessorService;
 import io.slack.blockchain.services.dialogs.DialogService;
@@ -25,7 +27,6 @@ public class SlackRestController {
 	@PostMapping(path = "/configure", produces = APPLICATION_JSON_UTF8_VALUE)
 	public void initiateConfiguration(@RequestParam("trigger_id") final String triggerId) {
 		emailConfigurationDialogService.openDialog(triggerId);
-
 	}
 
 	@PostMapping(path = "/transaction", produces = APPLICATION_JSON_UTF8_VALUE)
@@ -34,7 +35,9 @@ public class SlackRestController {
 	}
 
 	@PostMapping(path = "/dialog/submit", produces = APPLICATION_JSON_UTF8_VALUE)
-	public void processDialog(@RequestParam("payload") final String payload) {
+	public Payload processDialog(@RequestParam("payload") final String payload) {
 		final ProcessingResult processingResult = processorService.process(payload);
+
+		return processingResult.getPayload();
 	}
 }

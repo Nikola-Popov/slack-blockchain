@@ -31,13 +31,13 @@ public class ProcessorService {
 		DialogIdentityPayload dialogIdentityPayload = dialogPayloadParser.parseIdentity(payload);
 		final String callbackId = dialogIdentityPayload.getCallbackId();
 
-		if (callbackId.equals(TRANSACTION_DIALOG_CALLBACK_ID)) {
+		if (TRANSACTION_DIALOG_CALLBACK_ID.equals(callbackId)) {
 			TransactionDialogSubmission transactionDialogSubmission = dialogPayloadParser.parseSubmission(payload,
 					TransactionDialogSubmission.class);
 
 			return transactionDialogProcessor
 					.process(new TransactionDialogContent(dialogIdentityPayload, transactionDialogSubmission));
-		} else if (callbackId.equals(CONFIGURATION_DIALOG_CALLBACK_ID)) {
+		} else if (CONFIGURATION_DIALOG_CALLBACK_ID.equals(callbackId)) {
 			ConfigurationDialogSubmission configurationDialogSubmission = dialogPayloadParser.parseSubmission(payload,
 					ConfigurationDialogSubmission.class);
 

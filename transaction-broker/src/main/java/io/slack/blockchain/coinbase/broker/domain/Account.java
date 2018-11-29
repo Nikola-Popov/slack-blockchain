@@ -1,35 +1,35 @@
 package io.slack.blockchain.coinbase.broker.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 public class Account {
-	@JsonProperty("id")
+	@SerializedName("id")
 	private String id;
 
-	@JsonProperty("name")
+	@SerializedName("name")
 	private String name;
 
-	@JsonProperty("primary")
+	@SerializedName("primary")
 	private Boolean primary;
 
-	@JsonProperty("type")
+	@SerializedName("type")
 	private String type;
 
-	@JsonProperty("currency")
+	@SerializedName("currency")
 	private String currency;
 
-	@JsonProperty("balance")
+	@SerializedName("balance")
 	private Balance balance;
 
-	@JsonProperty("created_at")
+	@SerializedName("created_at")
 	private String createdAt;
 
-	@JsonProperty("updated_at")
+	@SerializedName("updated_at")
 	private String updatedAt;
 
-	@JsonProperty("resource")
+	@SerializedName("resource")
 	private String resource;
 
-	@JsonProperty("resource_path")
+	@SerializedName("resource_path")
 	private String resourcePath;
 }

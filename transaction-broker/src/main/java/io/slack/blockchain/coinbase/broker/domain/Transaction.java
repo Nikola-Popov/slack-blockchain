@@ -10,5 +10,5 @@ public class Transaction {
 	private final Currency currency;
 	private final BigDecimal amount;
 	private final String recipient;
-	// private final idem
+	// TODO private final idem
 }
