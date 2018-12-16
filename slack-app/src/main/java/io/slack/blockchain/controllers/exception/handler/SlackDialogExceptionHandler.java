@@ -19,7 +19,7 @@ import com.google.gson.JsonSyntaxException;
 
 import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
 import io.slack.blockchain.services.dialogs.exceptions.DialogResponderException;
-import io.slack.blockchain.services.dialogs.exceptions.MissingDialogSubmissionException;
+import io.slack.blockchain.services.processing.exceptions.MissingDialogSubmissionException;
 
 @ControllerAdvice
 @ResponseBody

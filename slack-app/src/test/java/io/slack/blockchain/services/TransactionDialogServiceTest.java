@@ -1,159 +1,159 @@
-// package io.slack.blockchain.services;
-//
-// import static org.mockito.ArgumentMatchers.any;
-// import static org.mockito.Mockito.doThrow;
-// import static org.mockito.Mockito.verify;
-// import static org.mockito.Mockito.when;
-// import static org.springframework.test.util.ReflectionTestUtils.setField;
-//
-// import java.io.IOException;
-// import java.net.URISyntaxException;
-// import java.util.List;
-//
-// import org.junit.Before;
-// import org.junit.Test;
-// import org.junit.runner.RunWith;
-// import org.mockito.InjectMocks;
-// import org.mockito.Mock;
-// import org.springframework.boot.test.context.SpringBootTest;
-// import org.springframework.boot.test.mock.mockito.MockBean;
-// import org.springframework.test.context.junit4.SpringRunner;
-//
-// import com.github.seratch.jslack.Slack;
-// import com.github.seratch.jslack.api.methods.MethodsClient;
-// import com.github.seratch.jslack.api.methods.SlackApiException;
-// import
-// com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest;
-// import com.github.seratch.jslack.api.methods.request.users.UsersListRequest;
-// import
-// com.github.seratch.jslack.api.methods.response.dialog.DialogOpenResponse;
-// import
-// com.github.seratch.jslack.api.methods.response.users.UsersListResponse;
-// import com.github.seratch.jslack.api.model.User;
-// import com.github.seratch.jslack.api.model.dialog.Dialog;
-// import com.github.seratch.jslack.api.model.dialog.DialogOption;
-//
-// import io.slack.blockchain.domain.dialog.TransactionDialogSubmission;
-// import
-// io.slack.blockchain.interactive.components.dialogs.TransactionsDialogFactory;
-// import
-// io.slack.blockchain.interactive.components.dialogs.client.DialogResponder;
-// import
-// io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
-// import io.slack.blockchain.processing.SubmittedTransactionProcessor;
-// import io.slack.blockchain.utils.converters.UserConverter;
-//
-// @RunWith(SpringRunner.class)
-// @SpringBootTest
-// public class TransactionDialogServiceTest {
-// private static final String RESPONSE_URL = "responseUrl";
-// private static final String SLACK_OAUTH_TOKEN_FIELD_NAME = "slackOauthToken";
-// private static final String SLACK_OUATH_TOKEN = "slack-oauth-token";
-// private static final String TRIGGER_ID = "triggerId";
-// private static final String PAYLOAD = "payload";
-// private static final Dialog DIALOG =
-// Dialog.builder().title("dialog-title").build();
-//
-// @InjectMocks
-// private TransactionDialogService transactionDialogService;
-//
-// @MockBean
-// private Slack slack;
-//
-// @Mock
-// private UserConverter userConverterMock;
-//
-// @Mock
-// private TransactionsDialogFactory slackTransactionDialogFactoryMock;
-//
-// @Mock
-// private SubmittedTransactionProcessor submittedTransactionProcessorMock;
-//
-// @Mock
-// private Slack slackMock;
-//
-// @Mock
-// private MethodsClient methodsClientMock;
-//
-// @Mock
-// private UsersListResponse usersListResponseMock;
-//
-// @Mock
-// private List<User> users;
-//
-// @Mock
-// private List<DialogOption> usersDialogOptions;
-//
-// @Mock
-// private DialogOpenResponse dialogOpenResponseMock;
-//
-// @Mock
-// private DialogResponder transactionDialogResponderMock;
-//
-// @Mock
-// private TransactionDialogSubmission transactionDialogSubmissionMock;
-//
-// @Before
-// public void setup() throws Exception {
-// when(slackMock.methods()).thenReturn(methodsClientMock);
-// when(methodsClientMock.usersList(any(UsersListRequest.class))).thenReturn(usersListResponseMock);
-// when(usersListResponseMock.getMembers()).thenReturn(users);
-//
-// when(userConverterMock.convert(users)).thenReturn(usersDialogOptions);
-// when(slackTransactionDialogFactoryMock.createTransactionsDialog(usersDialogOptions)).thenReturn(DIALOG);
-//
-// when(submittedTransactionProcessorMock.process(PAYLOAD)).thenReturn(transactionDialogSubmissionMock);
-// when(transactionDialogSubmissionMock.getResponseUrl()).thenReturn(RESPONSE_URL);
-// }
-//
-// @Test
-// public void testOpenTransactionDialogHappyPath() throws Exception {
-// setField(transactionDialogService, SLACK_OAUTH_TOKEN_FIELD_NAME,
-// SLACK_OUATH_TOKEN);
-//
-// transactionDialogService.openDialog(TRIGGER_ID);
-//
-// verify(methodsClientMock).dialogOpen(
-// DialogOpenRequest.builder().token(SLACK_OUATH_TOKEN).triggerId(TRIGGER_ID).dialog(DIALOG).build());
-// }
-//
-// @Test(expected = DialogOpenException.class)
-// public void testOpenTransactionDialogUsersListThrowsIOException() throws
-// Exception {
-// when(methodsClientMock.usersList(any(UsersListRequest.class))).thenThrow(IOException.class);
-//
-// transactionDialogService.openDialog(TRIGGER_ID);
-// }
-//
-// @Test(expected = DialogOpenException.class)
-// public void testOpenTransactionDialogUsersListThrowsSlackApiException()
-// throws Exception {
-// when(methodsClientMock.usersList(any(UsersListRequest.class))).thenThrow(SlackApiException.class);
-//
-// transactionDialogService.openDialog(TRIGGER_ID);
-// }
-//
-// @Test(expected = DialogOpenException.class)
-// public void
-// testOpenTransactionDialogMethodsOpenDialogThrowsSlackApiException() throws
-// Exception {
-// when(methodsClientMock.dialogOpen(any(DialogOpenRequest.class))).thenThrow(SlackApiException.class);
-//
-// transactionDialogService.openDialog(TRIGGER_ID);
-// }
-//
-// @Test
-// public void testProcessTransaction() throws Exception {
-// transactionDialogService.processTransaction(PAYLOAD);
-//
-// verify(submittedTransactionProcessorMock).process(PAYLOAD);
-// }
-//
-// @Test(expected = URISyntaxException.class)
-// public void testProcessTransactionProcessorThrowsUriSyntaxException() throws
-// Exception {
-// doThrow(URISyntaxException.class).when(submittedTransactionProcessorMock).process(PAYLOAD);
-//
-// transactionDialogService.processTransaction(PAYLOAD);
-// }
-// }
+package io.slack.blockchain.services;
+
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import com.github.seratch.jslack.Slack;
+import com.github.seratch.jslack.api.methods.MethodsClient;
+import com.github.seratch.jslack.api.methods.SlackApiException;
+import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest;
+import com.github.seratch.jslack.api.methods.request.dialog.DialogOpenRequest.DialogOpenRequestBuilder;
+import com.github.seratch.jslack.api.methods.request.users.UsersListRequest;
+import com.github.seratch.jslack.api.methods.request.users.UsersListRequest.UsersListRequestBuilder;
+import com.github.seratch.jslack.api.methods.response.dialog.DialogOpenResponse;
+import com.github.seratch.jslack.api.methods.response.users.UsersListResponse;
+import com.github.seratch.jslack.api.model.User;
+import com.github.seratch.jslack.api.model.dialog.Dialog;
+import com.github.seratch.jslack.api.model.dialog.DialogOption;
+
+import io.slack.blockchain.commons.configurations.SlackConfigurationProperties;
+import io.slack.blockchain.interactive.components.dialogs.exceptions.DialogOpenException;
+import io.slack.blockchain.interactive.components.dialogs.factories.TransactionsDialogFactory;
+import io.slack.blockchain.services.dialogs.DialogOpenResponseHandler;
+import io.slack.blockchain.services.dialogs.TransactionDialogService;
+import io.slack.blockchain.utils.converters.DialogUserConverter;
+
+@RunWith(MockitoJUnitRunner.class)
+public class TransactionDialogServiceTest {
+	private static final String SLACK_OUATH_TOKEN = "slack-oauth-token";
+	private static final String TRIGGER_ID = "triggerId";
+
+	@InjectMocks
+	private TransactionDialogService transactionDialogService;
+
+	@Mock
+	private DialogUserConverter dialogUserConverterMock;
+
+	@Mock
+	private TransactionsDialogFactory slackTransactionDialogFactoryMock;
+
+	@Mock
+	private Slack slackMock;
+
+	@Mock
+	private MethodsClient methodsClientMock;
+
+	@Mock
+	private UsersListResponse usersListResponseMock;
+
+	@Mock
+	private List<User> usersMock;
+
+	@Mock
+	private List<DialogOption> usersDialogOptionsMock;
+
+	@Mock
+	private DialogOpenResponse dialogOpenResponseMock;
+
+	@Mock
+	private SlackConfigurationProperties slackConfigurationPropertiesMock;
+
+	@Mock
+	private UsersListRequestBuilder usersListRequestBuilderMock;
+
+	@Mock
+	private UsersListRequest usersListRequestMock;
+
+	@Mock
+	private DialogOpenResponseHandler dialogOpenResponseHandlerMock;
+
+	@Mock
+	private DialogOpenRequestBuilder dialogOpenRequestBuilderMock;
+
+	@Mock
+	private DialogOpenRequest dialogOpenRequestMock;
+
+	@Mock
+	private Dialog dialogMock;
+
+	@Before
+	public void setup() throws Exception {
+		when(slackConfigurationPropertiesMock.getOauthToken()).thenReturn(SLACK_OUATH_TOKEN);
+		when(usersListRequestBuilderMock.token(SLACK_OUATH_TOKEN)).thenReturn(usersListRequestBuilderMock);
+		when(usersListRequestBuilderMock.build()).thenReturn(usersListRequestMock);
+		when(slackTransactionDialogFactoryMock.createTransactionsDialog(usersDialogOptionsMock)).thenReturn(dialogMock);
+
+		when(slackMock.methods()).thenReturn(methodsClientMock);
+		when(methodsClientMock.usersList(usersListRequestMock)).thenReturn(usersListResponseMock);
+		when(dialogOpenRequestBuilderMock.token(SLACK_OUATH_TOKEN)).thenReturn(dialogOpenRequestBuilderMock);
+		when(dialogOpenRequestBuilderMock.triggerId(TRIGGER_ID)).thenReturn(dialogOpenRequestBuilderMock);
+		when(dialogOpenRequestBuilderMock.dialog(dialogMock)).thenReturn(dialogOpenRequestBuilderMock);
+		when(dialogOpenRequestBuilderMock.build()).thenReturn(dialogOpenRequestMock);
+		when(methodsClientMock.dialogOpen(dialogOpenRequestMock)).thenReturn(dialogOpenResponseMock);
+		when(usersListResponseMock.getMembers()).thenReturn(usersMock);
+		when(dialogUserConverterMock.convert(usersMock)).thenReturn(usersDialogOptionsMock);
+	}
+
+	@Test
+	public void testOpenTransactionDialog() throws Exception {
+		transactionDialogService.openDialog(TRIGGER_ID);
+
+		verify(dialogOpenResponseHandlerMock).handleDialogOpenResponse(dialogOpenResponseMock);
+	}
+
+	@Test(expected = DialogOpenException.class)
+	public void testOpenTransactionDialogUsersListThrowsIOException() throws Exception {
+		when(methodsClientMock.usersList(usersListRequestMock)).thenThrow(IOException.class);
+
+		transactionDialogService.openDialog(TRIGGER_ID);
+
+		verifyNoInteractionsAfterUsersListFailed();
+	}
+
+	@Test(expected = DialogOpenException.class)
+	public void testOpenTransactionDialogUsersListThrowsSlackApiException() throws Exception {
+		doThrow(SlackApiException.class).when(methodsClientMock).usersList(usersListRequestMock);
+
+		transactionDialogService.openDialog(TRIGGER_ID);
+
+		verifyNoInteractionsAfterUsersListFailed();
+	}
+
+	@Test(expected = DialogOpenException.class)
+	public void testOpenTransactionDialogMethodsOpenDialogThrowsSlackApiException() throws Exception {
+		doThrow(SlackApiException.class).when(methodsClientMock).dialogOpen(dialogOpenRequestMock);
+
+		transactionDialogService.openDialog(TRIGGER_ID);
+	}
+
+	@Test(expected = DialogOpenException.class)
+	public void testOpenTransactionDialogUnableToHandleOpenedDialogResponse() {
+		doThrow(DialogOpenException.class).when(dialogOpenResponseHandlerMock)
+				.handleDialogOpenResponse(dialogOpenResponseMock);
+
+		transactionDialogService.openDialog(TRIGGER_ID);
+	}
+
+	private void verifyNoInteractionsAfterUsersListFailed() {
+		verify(dialogUserConverterMock, never()).convert(usersMock);
+		verify(slackTransactionDialogFactoryMock, never()).createTransactionsDialog(usersDialogOptionsMock);
+		verify(dialogOpenResponseHandlerMock, never()).handleDialogOpenResponse(dialogOpenResponseMock);
+		verify(slackConfigurationPropertiesMock, never()).getOauthToken();
+		verify(dialogOpenRequestBuilderMock, never()).triggerId(TRIGGER_ID);
+		verify(dialogOpenRequestBuilderMock, never()).dialog(dialogMock);
+		verify(dialogOpenRequestBuilderMock, never()).build();
+		verify(dialogOpenResponseHandlerMock, never()).handleDialogOpenResponse(dialogOpenResponseMock);
+	}
+}

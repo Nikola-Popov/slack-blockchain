@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.seratch.jslack.api.webhook.Payload;
-
-import io.slack.blockchain.domain.processing.ProcessingResult;
-import io.slack.blockchain.services.ProcessorService;
 import io.slack.blockchain.services.dialogs.DialogService;
+import io.slack.blockchain.services.processing.ProcessorService;
+import io.slack.blockchain.services.processing.exceptions.ProcessingException;
 
 @RestController("/slack")
 public class SlackRestController {
@@ -35,9 +33,7 @@ public class SlackRestController {
 	}
 
 	@PostMapping(path = "/dialog/submit", produces = APPLICATION_JSON_UTF8_VALUE)
-	public Payload processDialog(@RequestParam("payload") final String payload) {
-		final ProcessingResult processingResult = processorService.process(payload);
-
-		return processingResult.getPayload();
+	public void processDialog(@RequestParam("payload") final String payload) throws ProcessingException {
+		processorService.process(payload);
 	}
 }
