@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ConfigurationDialogContent extends DialogContent {
+public class ConfigurationDialogContent extends DialogContent<ConfigurationDialogSubmission> {
 	private final ConfigurationDialogSubmission configurationDialogSubmission;
 
 	public ConfigurationDialogContent(DialogIdentityPayload dialogIdentityPayload,
@@ -15,4 +15,8 @@ public class ConfigurationDialogContent extends DialogContent {
 		this.configurationDialogSubmission = configurationDialogSubmission;
 	}
 
+	@Override
+	public ConfigurationDialogSubmission getDialogSubmission() {
+		return configurationDialogSubmission;
+	}
 }

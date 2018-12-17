@@ -1,11 +1,8 @@
 package io.slack.blockchain.services;
 
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.io.IOException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,11 +39,11 @@ public class ProcessorServiceTest {
 	@Mock
 	private DialogPayloadParser dialogPayloadParserMock;
 
-	@Mock
-	private DialogProcessor<ConfigurationDialogContent> configurationDialogProcessorMock;
+	@Mock(name = "configurationDialogProcessor")
+	private DialogProcessor<ConfigurationDialogSubmission> configurationDialogProcessorMock;
 
-	@Mock
-	private DialogProcessor<TransactionDialogContent> transactionDialogProcessorMock;
+	@Mock(name = "transactionDialogProcessor")
+	private DialogProcessor<TransactionDialogSubmission> transactionDialogProcessorMock;
 
 	@Mock
 	private Slack slackMock;
@@ -63,10 +60,10 @@ public class ProcessorServiceTest {
 	@Mock
 	private ConfigurationDialogSubmission configurationDialogSubmissionMock;
 
-	@Mock
+	@Mock(name = "configurationDialogContentFactory")
 	private DialogContentFactory<ConfigurationDialogSubmission> configurationDialogContentFactoryMock;
 
-	@Mock
+	@Mock(name = "transactionDialogContentFactory")
 	private DialogContentFactory<TransactionDialogSubmission> transactionDialogContentFactoryMock;
 
 	@Mock
@@ -83,10 +80,10 @@ public class ProcessorServiceTest {
 				.thenReturn(transactionDialogSubmissionMock);
 		when(dialogPayloadParserMock.parseSubmission(PAYLOAD, ConfigurationDialogSubmission.class))
 				.thenReturn(configurationDialogSubmissionMock);
-		when(transactionDialogContentFactoryMock.create(dialogIdentityPayloadMock, transactionDialogSubmissionMock))
-				.thenReturn(transactionDialogContentMock);
-		when(configurationDialogContentFactoryMock.create(dialogIdentityPayloadMock, configurationDialogSubmissionMock))
-				.thenReturn(configurationDialogContentMock);
+		when(transactionDialogContentFactoryMock.createDialogContent(dialogIdentityPayloadMock,
+				transactionDialogSubmissionMock)).thenReturn(transactionDialogContentMock);
+		when(configurationDialogContentFactoryMock.createDialogContent(dialogIdentityPayloadMock,
+				configurationDialogSubmissionMock)).thenReturn(configurationDialogContentMock);
 	}
 
 	@Test(expected = ProcessingException.class)
@@ -101,8 +98,6 @@ public class ProcessorServiceTest {
 
 	@Test(expected = ProcessingException.class)
 	public void testProcessFailsWhenTryingToSendResponseToSlack() throws Exception {
-		doThrow(IOException.class).when(slackMock).send(RESPONSE_URL, payloadMock);
-
 		processorService.process(PAYLOAD);
 	}
 

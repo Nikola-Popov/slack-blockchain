@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TransactionDialogContent extends DialogContent {
+public class TransactionDialogContent extends DialogContent<TransactionDialogSubmission> {
 	private final TransactionDialogSubmission transactionDialogSubmission;
 
 	public TransactionDialogContent(DialogIdentityPayload dialogIdentityPayload,
@@ -15,4 +15,8 @@ public class TransactionDialogContent extends DialogContent {
 		this.transactionDialogSubmission = transactionDialogSubmission;
 	}
 
+	@Override
+	public TransactionDialogSubmission getDialogSubmission() {
+		return transactionDialogSubmission;
+	}
 }

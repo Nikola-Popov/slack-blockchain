@@ -9,7 +9,7 @@ import io.slack.blockchain.domain.dialog.submissions.TransactionDialogSubmission
 @Component
 public class TransactionDialogContentFactory implements DialogContentFactory<TransactionDialogSubmission> {
 	@Override
-	public TransactionDialogContent create(final DialogIdentityPayload dialogIdentityPayload,
+	public TransactionDialogContent createDialogContent(final DialogIdentityPayload dialogIdentityPayload,
 			final TransactionDialogSubmission transactionDialogSubmission) {
 		return new TransactionDialogContent(dialogIdentityPayload, transactionDialogSubmission);
 	}

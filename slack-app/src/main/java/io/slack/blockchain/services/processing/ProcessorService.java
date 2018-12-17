@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import com.github.seratch.jslack.Slack;
 import com.github.seratch.jslack.api.webhook.Payload;
 
-import io.slack.blockchain.domain.dialog.contents.ConfigurationDialogContent;
 import io.slack.blockchain.domain.dialog.contents.DialogIdentityPayload;
-import io.slack.blockchain.domain.dialog.contents.TransactionDialogContent;
 import io.slack.blockchain.domain.dialog.submissions.ConfigurationDialogSubmission;
 import io.slack.blockchain.domain.dialog.submissions.TransactionDialogSubmission;
 import io.slack.blockchain.interactive.components.dialogs.parsers.DialogPayloadParser;
@@ -33,10 +31,10 @@ public class ProcessorService {
 	private DialogPayloadParser dialogPayloadParser;
 
 	@Autowired
-	private DialogProcessor<ConfigurationDialogContent> configurationDialogProcessor;
+	private DialogProcessor<ConfigurationDialogSubmission> configurationDialogProcessor;
 
 	@Autowired
-	private DialogProcessor<TransactionDialogContent> transactionDialogProcessor;
+	private DialogProcessor<TransactionDialogSubmission> transactionDialogProcessor;
 
 	@Autowired
 	private DialogContentFactory<ConfigurationDialogSubmission> configurationDialogContentFactory;
@@ -53,17 +51,17 @@ public class ProcessorService {
 
 		Payload responsePayload = null;
 		if (TRANSACTION_DIALOG_CALLBACK_ID.equals(callbackId)) {
-			TransactionDialogSubmission transactionDialogSubmission = dialogPayloadParser.parseSubmission(payload,
+			final TransactionDialogSubmission transactionDialogSubmission = dialogPayloadParser.parseSubmission(payload,
 					TransactionDialogSubmission.class);
 
 			responsePayload = transactionDialogProcessor.process(
-					transactionDialogContentFactory.create(dialogIdentityPayload, transactionDialogSubmission));
+					transactionDialogContentFactory.createDialogContent(dialogIdentityPayload, transactionDialogSubmission));
 		} else if (CONFIGURATION_DIALOG_CALLBACK_ID.equals(callbackId)) {
-			ConfigurationDialogSubmission configurationDialogSubmission = dialogPayloadParser.parseSubmission(payload,
-					ConfigurationDialogSubmission.class);
+			final ConfigurationDialogSubmission configurationDialogSubmission = dialogPayloadParser
+					.parseSubmission(payload, ConfigurationDialogSubmission.class);
 
 			responsePayload = configurationDialogProcessor.process(
-					configurationDialogContentFactory.create(dialogIdentityPayload, configurationDialogSubmission));
+					configurationDialogContentFactory.createDialogContent(dialogIdentityPayload, configurationDialogSubmission));
 		} else {
 			log.error(INVALID_CALLBACK_ID_RECEIVED);
 			throw new MissingDialogSubmissionException(INVALID_CALLBACK_ID_RECEIVED);
