@@ -1,4 +1,4 @@
-package io.slack.blockchain.coinbase.security.oauth.controllers;
+package io.slack.blockchain.controllers;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import io.slack.blockchain.coinbase.broker.controllers.CoinbaseAuthorizationHandlerRestController;
 import io.slack.blockchain.coinbase.broker.exceptions.AuthorizationException;
 import io.slack.blockchain.coinbase.broker.services.AuthorizationService;
 

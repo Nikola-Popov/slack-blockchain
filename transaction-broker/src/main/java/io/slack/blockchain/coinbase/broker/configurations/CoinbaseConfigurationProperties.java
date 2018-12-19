@@ -22,4 +22,6 @@ public class CoinbaseConfigurationProperties {
 	private String tokenHost;
 
 	private String defaultSendLimmit;
+
+	private String redirectUri;
 }

@@ -24,6 +24,8 @@ import io.slack.blockchain.coinbase.broker.configurations.CoinbaseConfigurationP
 
 @Component
 public class CoinbaseAuthorizationEndpointBuilderUtil {
+	private static final String DEFAULT_CURRENCY = "USD";
+
 	@Autowired
 	private CoinbaseConfigurationProperties coinbaseConfigurationProperties;
 
@@ -35,15 +37,15 @@ public class CoinbaseAuthorizationEndpointBuilderUtil {
 				.queryParam(RESPONSE_TYPE, CODE).queryParam(CLIENT_ID, coinbaseConfigurationProperties.getClientId())
 				.queryParam(SCOPE, WALLET_TRANSACTIONS_SEND)
 				.queryParam(META_SEND_LIMIT_AMOUNT, coinbaseConfigurationProperties.getDefaultSendLimmit())
-				.queryParam(META_SEND_LIMIT_CURRENCY, "USD").queryParam(META_SEND_LIMIT_PERIOD, EXPIRE_EVERYDAY)
-				.queryParam(STATE, state).build().toUriString();
+				.queryParam(META_SEND_LIMIT_CURRENCY, DEFAULT_CURRENCY)
+				.queryParam(META_SEND_LIMIT_PERIOD, EXPIRE_EVERYDAY).queryParam(STATE, state).build().toUriString();
 	}
 
-	public String buildAccessTokenEndpoint(final String code, final String redirectUri) {
+	public String buildAccessTokenEndpoint(final String code) {
 		return uriComponentsBuilder.scheme(HTTPS_SCHEME).host(coinbaseConfigurationProperties.getTokenHost())
 				.queryParam(GRANT_TYPE, AUTHORIZATION_CODE).queryParam(CODE, code)
 				.queryParam(CLIENT_ID, coinbaseConfigurationProperties.getClientId())
 				.queryParam(CLIENT_SECRET, coinbaseConfigurationProperties.getClientSecret())
-				.queryParam(REDIRECT_URI, redirectUri).build().toUriString();
+				.queryParam(REDIRECT_URI, coinbaseConfigurationProperties.getRedirectUri()).build().toUriString();
 	}
 }

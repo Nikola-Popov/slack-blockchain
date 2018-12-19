@@ -2,8 +2,6 @@ package io.slack.blockchain.coinbase.security.oauth.services;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import java.net.URISyntaxException;
@@ -56,7 +54,7 @@ public class CoinbaseAuthorizationServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		when(coinbaseAuthorizationEndpointBuilderUtilMock.buildAccessTokenEndpoint(eq(CODE), anyString()))
+		when(coinbaseAuthorizationEndpointBuilderUtilMock.buildAccessTokenEndpoint(CODE))
 				.thenReturn(COINBASE_ACESS_TOKEN_ENDPOINT);
 		when(requestEntityFactoryMock.createPostRequestEntity(COINBASE_ACESS_TOKEN_ENDPOINT))
 				.thenReturn(requestEntityMock);

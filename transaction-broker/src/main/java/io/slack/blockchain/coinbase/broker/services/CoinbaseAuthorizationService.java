@@ -19,6 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class CoinbaseAuthorizationService implements AuthorizationService {
+	private static final String COINBASE_AUTHORIZATION_FAILED = "Coinbase OAuth service failed to authorize the request";
+	private static final String INVALID_CODE = "The provided code is invalid!";
+
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -31,19 +34,19 @@ public class CoinbaseAuthorizationService implements AuthorizationService {
 	@Override
 	public String acquireAccessTokenConsumingCode(final String code) throws AuthorizationException {
 		if (isEmpty(code)) {
-			throw new IllegalArgumentException("The provided code is empty!");
+			log.error(INVALID_CODE);
+			throw new IllegalArgumentException(INVALID_CODE);
 		}
 		final String coinbaseAcessTokenEndpoint = coinbaseAuthorizationEndpointBuilderUtil
-				.buildAccessTokenEndpoint(code, "http://9ac41555.ngrok.io/coinbase/authorization/granted");
+				.buildAccessTokenEndpoint(code);
 		ResponseEntity<CoinbaseOAuthResponse> responseEntity = null;
 		try {
 			responseEntity = restTemplate.exchange(
 					requestEntityFactory.createPostRequestEntity(coinbaseAcessTokenEndpoint),
 					CoinbaseOAuthResponse.class);
 		} catch (RestClientException | URISyntaxException exception) {
-			final String errorMessage = "Coinbase OAuth service failed to authorize the request";
-			log.error(errorMessage, exception);
-			throw new AuthorizationException(errorMessage);
+			log.error(COINBASE_AUTHORIZATION_FAILED, exception);
+			throw new AuthorizationException(COINBASE_AUTHORIZATION_FAILED);
 		}
 		return responseEntity.getBody().getAccessToken();
 	}

@@ -1,4 +1,4 @@
-package io.slack.blockchain.coinbase.broker.controllers;
+package io.slack.blockchain.controllers;
 
 import static io.slack.blockchain.coinbase.broker.constants.CoinbaseAuthorizationConstants.GRANTED_AUTHORIZATION_URI;
 import static io.slack.blockchain.coinbase.broker.constants.QueryParamsConstants.CODE;
